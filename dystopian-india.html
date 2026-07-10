@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dystopian India in the Age after Kalyug | iCreate</title>
+  <style>
+    :root {
+      --bg: #050605;
+      --text: #f4f7ef;
+      --muted: #a7afa3;
+      --line: rgba(244, 247, 239, 0.13);
+      --accent: #76ff67;
+      --accent-2: #d8ff72;
+      --warm: #ff8664;
+      --cool: #8bd6ff;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--bg); }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 14% 12%, rgba(118, 255, 103, 0.12), transparent 28rem),
+        radial-gradient(circle at 82% 18%, rgba(255, 134, 100, 0.1), transparent 24rem),
+        radial-gradient(circle at 58% 78%, rgba(139, 214, 255, 0.08), transparent 30rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .page { position: relative; overflow: hidden; }
+
+    .page::before {
+      content: "";
+      position: fixed;
+      inset: -20%;
+      z-index: -2;
+      background:
+        conic-gradient(from 140deg at 50% 50%, transparent, rgba(118, 255, 103, 0.18), rgba(139, 214, 255, 0.08), rgba(255, 134, 100, 0.16), transparent),
+        radial-gradient(circle at 50% 35%, rgba(216, 255, 114, 0.12), transparent 22rem);
+      filter: blur(28px) saturate(1.2);
+      animation: aura 24s linear infinite;
+      opacity: 0.72;
+    }
+
+    .page::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(244, 247, 239, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 247, 239, 0.035) 1px, transparent 1px);
+      background-size: 92px 92px;
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
+      opacity: 0.5;
+    }
+
+    .nav {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 18px auto 0;
+      padding: 10px 10px 10px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(5, 6, 5, 0.7);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #061006;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font-size: 14px;
+    }
+
+    .back {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 18px;
+      border-radius: 999px;
+      color: #071006;
+      background: var(--text);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .hero, .study, .footer { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
+
+    .hero {
+      min-height: 66svh;
+      padding: 108px 0 78px;
+      display: grid;
+      align-items: end;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-size: 0.86rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    h1, p, figure { margin-top: 0; }
+
+    h1 {
+      max-width: 1040px;
+      margin-bottom: 26px;
+      font-size: clamp(3.05rem, 8vw, 7.6rem);
+      line-height: 0.9;
+      letter-spacing: 0;
+    }
+
+    .intro {
+      max-width: 920px;
+      margin-bottom: 0;
+      color: #d8ded2;
+      font-size: clamp(1rem, 1.6vw, 1.22rem);
+    }
+
+    .intro + .intro { margin-top: 18px; }
+
+    .study {
+      padding: 70px 0 96px;
+      border-top: 1px solid var(--line);
+    }
+
+    .pdf-gallery {
+      display: grid;
+      gap: 22px;
+    }
+
+    .page-card {
+      margin-bottom: 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(118, 255, 103, 0.12), transparent 18rem),
+        radial-gradient(circle at 82% 20%, rgba(255, 134, 100, 0.08), transparent 18rem),
+        rgba(244, 247, 239, 0.035);
+      backdrop-filter: blur(18px);
+    }
+
+    .page-card img {
+      width: 100%;
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #080a08;
+    }
+
+    .download-line {
+      margin: 24px 0 0;
+      color: #d8ded2;
+      font-size: clamp(1rem, 1.6vw, 1.14rem);
+    }
+
+    .download-line a {
+      color: var(--accent-2);
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .footer {
+      padding: 28px 0 44px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 640px) {
+      .nav { width: min(calc(100% - 24px), var(--max)); }
+      .brand { font-size: 14px; }
+      .back { min-height: 36px; padding: 0 13px; }
+      .hero, .study, .footer { width: min(calc(100% - 28px), var(--max)); }
+      .hero { min-height: 60svh; padding-top: 76px; }
+      .page-card { padding: 9px; }
+      .pdf-gallery { gap: 14px; }
+    }
+
+    @keyframes aura { from { transform: rotate(0deg) scale(1); } to { transform: rotate(360deg) scale(1.04); } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav" aria-label="Dystopian India navigation">
+      <a class="brand" href="concept-art.html">
+        <span class="brand-mark">i</span>
+        <span>iCreate</span>
+      </a>
+      <a class="back" href="concept-art.html#environments">Back</a>
+    </nav>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Environment Study 01</p>
+          <h1 id="page-title">Dystopian India in the Age after Kalyug</h1>
+          <p class="intro">For this assignment, we were given the creative freedom to design any environment of our choice, with the requirement that it be rooted in Indian culture. We chose to imagine India 6,700 years in the future, at the predicted end of Kalyug, and built a dystopian world around this concept.</p>
+          <p class="intro">As part of the project, I contributed by gathering visual references, exploring and curating mood boards, and helping refine the finer details of the city in the final render to enhance its depth and atmosphere.</p>
+        </div>
+      </section>
+
+      <section class="study" aria-label="Dystopian India PDF pages">
+        <div class="pdf-gallery">
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczPc2spiBxzFvzSq-3zz0wnoofRJLVUk7UjmuqxQbyZVkSnbFq0Q2V1nkrDPrQKIo4c9sCREq0tfmyGpqJwSYEUryxqdgVJzX8oxK3AXFbO-gCZvzgpP5erC9PC7DBkDShR7BTH_REmKtD6VyyngFO4=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 2" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczNCUrsTvcxdvmOzniKhzqHMTxCI4RRVJIB7DEj2nGP9_cs1uGNAf5h7qAg3ashN2M7VouIA-eRmDbfB7sISmXfIC8398D4XZQAyOYR0fDrqQP670OYpAvnkL4S1SBOGZXz3A3_LUwAVu9bYAsSW31I=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 3" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczOwSowkqk3wi-R5ercG9LIw62EAoEXL2ZRxlfpM93sqM44xPCTBdS2z9IiLqWLUvD-lVqKBq38KJ73LZPj2HYedwU9lOLZRjASdQmG0oEeK9_cjEjGxMz3iQyh-ywdh21ikxH89vKwm-8r2Kcjn1qk=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 4" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczOu5v4ofQuMsg6YutS2xiGuzv4dcsWyNr0Appr9mm6DpogKspOawhg58Zt9damUofOA44BykL7lGmErVnUZmt4KI9w-iHKbsWMIE-yam32exVW1nixgj_W8MLkltEnSFFI5kZWc50nY8oLzGhcL5No=w1891-h1063-s-no-gm?authuser=2" alt="Dystopian India concept page 5" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczN3_H4U7pDmV_fJOqQ84-eUu3OIosLebxQqGkquJJ9REHnm1s--TqEtSaIWMaiaQ8fdf-41oQqMMhmJVFuL0EuPWXyKlRGMKJg23f-PJM7J6Z7mUwp8l1A5qDFK-0s_gHrAaFSmceFBesSwCnc8yzY=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 6" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczN1pcgx_2bKcenPUdw_51KcmlKSbH3pvsjQMBwwE5Fyjl3sV06a1k3R8hiMYTwamNIsESc9oswSxVQ02jX6O0l6ZoylHSepYxnlXPfpyfi6UiFv1z4UqR6u0f1wdfjJ_HJpsm1frJgJ_vwzMWtl_JA=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 7" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczPM7Jve8Nd739LfilfauqpaF-7cj3jMTGTpIebynzK4pfiYeD2NnA0pRtFmvn4zrU482E8yYXDuaoHUUuv2r5FqmNvzcFAewnHEJ8aSf8MYcIj9YzwM5BhVCt87-wRW2-Q7rZ1C10kJklEBAzLMPgY=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 8" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczMdPuUG_vb4bg__6fKaNPkB8SyKaVvRRokca0yLcItpSd3gEiFq-QpWvrVrpccenV7cj8kK1BWqlDYXBdjmF0QcOtp0xHhlern75xU4JRPqs2f3S457v9FSJ28NTi_8ShoDJoA0VhBaI1baHvfcxlg=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 9" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczNyr3jM9BSVg1Kraci-9S4ui2dVsiGM7obbYb9BTqjdmhi54c44zV_LCjH_CfKpdAX_skIRnEPZeJY2mAgER6_zvMkFbS2Bku6bK5IBtAN-_1U6_bkd-iGAJ0H-HVTGnI7xW07BjesfWxa0siFu4d8=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 10" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczPlVfLNad51R_zqnKtA4vX9F_T44r91ucREisa5RsXZ3Do8zGB0IrRTZcJ6TdKINxKHhS2FMZeelLySPHxXPHZ4E44GR6xMUjXQ7bxQmsK0eIhgxKFogSjcF5IPNIFHuRh8EtIIeTQuX-zJP1cuPtY=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 11" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczMdY6jMmjDT3H0DsSLFpiAc5wX_xN9Ykun4K9hGUA-NDImVeRMSEtfIketF_fOg_9_vvspprB_rXWIhv1qzQgCY64IAqU7LIRRWGczxVYBrdinRLtBR0_g-7CMOESI-ROnckxG9me5IG8QKkAKbQK4=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 12" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczNGM-DSRKi12e84T1jtRTR8lYgh9qt-8ID066tTNiwGrOMNi5Ncn103pDf60VWsa0EEMNG_DMw1IAy5lnnr-HMZk24SECkalt7ueEgq0ez9tHjzcjB12lFhk9Hry3yVWMxaIeMIR2dZqnNdwf551YQ=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 13" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczOmptrcFafNHm2SZQ_CyXWoGfyOWfphMWhtHkHZxPKPS6uzW44TtxkvMoePeXme7FIaBgfpMMC68vLvptN9RlK0-KhTR40cmkLsSo5P1cJ4oEB964JV2SIZWkT5lbEXogIC9XJTCc9pRnazBbn0Fao=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 14" loading="lazy" /></figure>
+        </div>
+        <p class="download-line">Download pdf: <a href="https://drive.google.com/file/d/1aziU-CY5iYztAnU3ts8W145P3h6sA0eh/view?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/file/d/1aziU-CY5iYztAnU3ts8W145P3h6sA0eh/view?usp=sharing</a></p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>iCreate | Environment concept art</p>
+    </footer>
+  </div>
+</body>
+</html>

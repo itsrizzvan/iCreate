@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iCreate | Ivan Portfolio</title>
+  <style>
+    :root {
+      --bg: #050605;
+      --panel: #111410;
+      --panel-soft: #171b16;
+      --text: #f4f7ef;
+      --muted: #a7afa3;
+      --line: rgba(244, 247, 239, 0.13);
+      --accent: #76ff67;
+      --accent-2: #d8ff72;
+      --warm: #ff8664;
+      --cool: #8bd6ff;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(118, 255, 103, 0.08), transparent 28rem),
+        radial-gradient(circle at 80% 10%, rgba(255, 134, 100, 0.08), transparent 24rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 18px 0 auto;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .nav {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      padding: 10px 10px 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      background: rgba(5, 6, 5, 0.68);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      pointer-events: auto;
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.28);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #061006;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font-size: 14px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      padding: 8px 13px;
+      border-radius: 999px;
+      transition: color 220ms ease, background 220ms ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(244, 247, 239, 0.08);
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 18px;
+      border-radius: 999px;
+      color: #071006;
+      background: var(--text);
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform 220ms ease, background 220ms ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      background: var(--accent);
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      padding: 140px 20px 72px;
+      display: grid;
+      align-items: end;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: -12%;
+      z-index: -3;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      background:
+        linear-gradient(115deg, rgba(118, 255, 103, 0.18), transparent 34%),
+        linear-gradient(235deg, rgba(139, 214, 255, 0.12), transparent 38%),
+        radial-gradient(circle at 72% 48%, rgba(255, 134, 100, 0.16), transparent 22rem);
+      filter: blur(6px);
+      animation: drift 16s ease-in-out infinite alternate;
+    }
+
+    .hero::after {
+      background-image:
+        linear-gradient(rgba(244, 247, 239, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 247, 239, 0.055) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, black, transparent 84%);
+      transform: perspective(900px) rotateX(62deg) translateY(8%);
+      transform-origin: center bottom;
+      animation: gridMove 12s linear infinite;
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      opacity: 0.9;
+      perspective: 900px;
+    }
+
+    .hero-media::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(118, 255, 103, 0.24), transparent 18rem),
+        conic-gradient(from 180deg at 50% 50%, rgba(118, 255, 103, 0), rgba(216, 255, 114, 0.42), rgba(139, 214, 255, 0.18), rgba(255, 134, 100, 0.28), rgba(118, 255, 103, 0));
+      filter: blur(24px) saturate(1.24);
+      animation: auraSpin 22s linear infinite;
+      opacity: 0.56;
+    }
+
+    .hero-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(5, 6, 5, 0.02), rgba(5, 6, 5, 0.64) 82%),
+        repeating-linear-gradient(100deg, rgba(244, 247, 239, 0.08) 0 1px, transparent 1px 20px);
+      mix-blend-mode: screen;
+      opacity: 0.22;
+      animation: scanDrift 9s linear infinite;
+    }
+
+    .motion-plane {
+      position: absolute;
+      inset: 8% -8% auto;
+      height: 72vh;
+      transform: rotate(-8deg) skewY(-2deg);
+      border-block: 1px solid rgba(244, 247, 239, 0.08);
+      background:
+        linear-gradient(90deg, transparent, rgba(118, 255, 103, 0.42), transparent 28%),
+        linear-gradient(90deg, transparent 28%, rgba(244, 247, 239, 0.16), transparent 52%),
+        linear-gradient(90deg, transparent 60%, rgba(255, 134, 100, 0.34), transparent);
+      background-size: 180% 100%;
+      animation: planeSweep 7.5s ease-in-out infinite alternate;
+      opacity: 0.62;
+    }
+
+    .motion-plane.secondary {
+      inset: 22% -14% auto;
+      height: 54vh;
+      transform: rotate(9deg) skewY(3deg);
+      filter: blur(1px);
+      animation-duration: 10s;
+      animation-direction: alternate-reverse;
+      opacity: 0.45;
+    }
+
+    .aura-core {
+      position: absolute;
+      width: min(58vw, 760px);
+      aspect-ratio: 1;
+      right: max(3vw, 20px);
+      top: 15vh;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 36% 32%, rgba(244, 247, 239, 0.82), transparent 8%),
+        radial-gradient(circle at 48% 46%, rgba(118, 255, 103, 0.62), transparent 24%),
+        radial-gradient(circle at 64% 60%, rgba(216, 255, 114, 0.42), transparent 34%),
+        radial-gradient(circle at center, rgba(139, 214, 255, 0.18), transparent 56%);
+      filter: blur(10px);
+      mix-blend-mode: screen;
+      opacity: 0.66;
+      animation: coreFloat 9s ease-in-out infinite alternate;
+    }
+
+    .beam {
+      position: absolute;
+      left: -10vw;
+      width: 120vw;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(244, 247, 239, 0.42), transparent);
+      box-shadow: 0 0 34px rgba(118, 255, 103, 0.36);
+      opacity: 0.56;
+      animation: beamFall 8s linear infinite;
+    }
+
+    .beam.one { top: 24%; animation-delay: -1s; }
+    .beam.two { top: 52%; animation-delay: -4s; }
+    .beam.three { top: 72%; animation-delay: -6s; }
+
+    .reel {
+      position: absolute;
+      width: 22vw;
+      min-width: 190px;
+      height: 145vh;
+      top: -20vh;
+      display: grid;
+      gap: 18px;
+      transform: rotate(12deg);
+      animation: reelScroll 18s linear infinite;
+      will-change: transform;
+      opacity: 0.32;
+    }
+
+    .reel:nth-child(1) {
+      left: 5vw;
+      animation-duration: 22s;
+    }
+
+    .reel:nth-child(2) {
+      left: 39vw;
+      animation-duration: 16s;
+      animation-direction: reverse;
+      opacity: 0.75;
+    }
+
+    .reel:nth-child(3) {
+      right: 4vw;
+      animation-duration: 26s;
+      opacity: 0.7;
+    }
+
+    .frame {
+      min-height: 220px;
+      border: 1px solid rgba(244, 247, 239, 0.1);
+      border-radius: 6px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.16), transparent),
+        var(--art);
+      box-shadow: var(--shadow);
+    }
+
+    .f1 { --art: linear-gradient(145deg, #142117, #77ff67 48%, #d8ff72); }
+    .f2 { --art: radial-gradient(circle at 30% 25%, #8bd6ff, transparent 36%), linear-gradient(160deg, #101410, #293128); }
+    .f3 { --art: linear-gradient(135deg, #ff8664, #211511 46%, #f4f7ef); }
+    .f4 { --art: radial-gradient(circle at 70% 25%, #d8ff72, transparent 34%), linear-gradient(135deg, #050605, #24291f); }
+
+    .hero-content {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      display: grid;
+      gap: 28px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--accent);
+      font-size: clamp(0.78rem, 1.8vw, 0.9rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin-bottom: 0;
+      font-size: clamp(4.2rem, 13vw, 10.5rem);
+      line-height: 0.86;
+      letter-spacing: 0;
+      font-weight: 800;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      hyphens: auto;
+    }
+
+    .hero-tagline {
+      max-width: 660px;
+      margin: 0;
+      color: #d8ded2;
+      font-size: clamp(1.05rem, 2.3vw, 1.45rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      background: rgba(244, 247, 239, 0.06);
+      font-size: 15px;
+      font-weight: 700;
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+    }
+
+    .button.primary {
+      color: #071006;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      border-color: rgba(244, 247, 239, 0.32);
+      background: rgba(244, 247, 239, 0.12);
+    }
+
+    .button.primary:hover {
+      background: var(--text);
+    }
+
+    .scroll-note {
+      position: absolute;
+      right: 28px;
+      bottom: 28px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      writing-mode: vertical-rl;
+    }
+
+    .section {
+      position: relative;
+      padding: 112px 20px;
+      border-top: 1px solid var(--line);
+      scroll-margin-top: 100px;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        linear-gradient(180deg, rgba(244, 247, 239, 0.018), rgba(244, 247, 239, 0.045) 50%, rgba(244, 247, 239, 0.018));
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 14% 24%, rgba(118, 255, 103, 0.11), transparent 22rem),
+        radial-gradient(circle at 84% 66%, rgba(139, 214, 255, 0.08), transparent 25rem),
+        linear-gradient(115deg, transparent, rgba(244, 247, 239, 0.035), transparent 68%);
+    }
+
+    .section::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(244, 247, 239, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 247, 239, 0.035) 1px, transparent 1px);
+      background-size: 96px 96px;
+      mask-image: linear-gradient(to bottom, transparent, black 18%, black 80%, transparent);
+      opacity: 0.38;
+    }
+
+    .section-inner {
+      position: relative;
+      width: min(100%, var(--max));
+      margin: 0 auto;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(260px, 0.7fr);
+      gap: 44px;
+      align-items: end;
+      margin-bottom: 46px;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(2.2rem, 6vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .about-copy {
+      padding: clamp(24px, 5vw, 44px);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(145deg, rgba(244, 247, 239, 0.09), rgba(244, 247, 239, 0.025)),
+        radial-gradient(circle at 82% 12%, rgba(118, 255, 103, 0.12), transparent 16rem);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+    }
+
+    .about-copy p {
+      max-width: 760px;
+      color: #d8ded2;
+      font-size: clamp(1.08rem, 2vw, 1.35rem);
+    }
+
+    .stats {
+      display: grid;
+      gap: 18px;
+    }
+
+    .stat {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(160deg, rgba(23, 27, 22, 0.92), rgba(10, 12, 10, 0.72)),
+        radial-gradient(circle at top right, rgba(216, 255, 114, 0.12), transparent 12rem);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: clamp(2rem, 5vw, 3.7rem);
+      line-height: 1;
+      color: var(--accent-2);
+    }
+
+    .stat span {
+      color: var(--muted);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .tag {
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #d8ded2;
+      background: rgba(5, 6, 5, 0.28);
+      font-size: 14px;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(118, 255, 103, 0.14), transparent 18rem),
+        radial-gradient(circle at 82% 20%, rgba(255, 134, 100, 0.1), transparent 18rem),
+        rgba(244, 247, 239, 0.035);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+    }
+
+    .work-card {
+      position: relative;
+      min-height: 460px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel-soft);
+      transform: translateZ(0);
+    }
+
+    .work-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--image);
+      transition: transform 500ms ease, opacity 500ms ease;
+    }
+
+    .work-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(5, 6, 5, 0.04), rgba(5, 6, 5, 0.88));
+    }
+
+    .work-card:hover::before {
+      transform: scale(1.06);
+      opacity: 0.92;
+    }
+
+    .work-content {
+      position: relative;
+      z-index: 1;
+      padding: 24px;
+      margin-top: auto;
+    }
+
+    .work-kicker {
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .work-card h3 {
+      margin-bottom: 10px;
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      line-height: 1.05;
+    }
+
+    .work-card p {
+      margin-bottom: 0;
+      color: #d7ddd2;
+    }
+
+    .w1 {
+      --image:
+        radial-gradient(circle at 20% 18%, rgba(118, 255, 103, 0.85), transparent 28%),
+        radial-gradient(circle at 80% 26%, rgba(139, 214, 255, 0.72), transparent 24%),
+        linear-gradient(145deg, #0c100c, #2c3228);
+    }
+
+    .w2 {
+      --image:
+        linear-gradient(120deg, rgba(255, 134, 100, 0.9), transparent 34%),
+        radial-gradient(circle at 70% 72%, rgba(216, 255, 114, 0.75), transparent 32%),
+        linear-gradient(145deg, #16120f, #303028);
+    }
+
+    .w3 {
+      --image:
+        repeating-linear-gradient(115deg, rgba(244, 247, 239, 0.18) 0 1px, transparent 1px 18px),
+        radial-gradient(circle at 50% 34%, rgba(118, 255, 103, 0.58), transparent 34%),
+        linear-gradient(160deg, #070807, #202820);
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(300px, 0.8fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .contact-card,
+    form {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(145deg, rgba(244, 247, 239, 0.075), rgba(244, 247, 239, 0.025)),
+        radial-gradient(circle at 90% 12%, rgba(118, 255, 103, 0.08), transparent 16rem);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card {
+      padding: clamp(24px, 4vw, 38px);
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .contact-links {
+      display: grid;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .contact-links a {
+      color: #d8ded2;
+      border-bottom: 1px solid rgba(244, 247, 239, 0.18);
+      padding-bottom: 10px;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+      padding: clamp(20px, 4vw, 32px);
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px 15px;
+      color: var(--text);
+      background: rgba(5, 6, 5, 0.52);
+      font: inherit;
+      outline: none;
+      transition: border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: rgba(118, 255, 103, 0.72);
+      box-shadow: 0 0 0 4px rgba(118, 255, 103, 0.1);
+    }
+
+    .submit {
+      min-height: 50px;
+      border: 0;
+      border-radius: 999px;
+      color: #071006;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 220ms ease, filter 220ms ease;
+    }
+
+    .submit:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
+
+    .footer {
+      padding: 28px 20px 44px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .reveal {
+      animation: reveal 700ms both ease-out;
+    }
+
+    @supports (animation-timeline: view()) {
+      .reveal {
+        animation-timeline: view();
+        animation-range: entry 8% cover 34%;
+      }
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(42px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate3d(-2%, -1%, 0) scale(1);
+      }
+      to {
+        transform: translate3d(2%, 2%, 0) scale(1.04);
+      }
+    }
+
+    @keyframes auraSpin {
+      from {
+        transform: rotate(0deg) scale(1);
+      }
+      to {
+        transform: rotate(360deg) scale(1.04);
+      }
+    }
+
+    @keyframes scanDrift {
+      from {
+        background-position: 0 0, 0 0;
+      }
+      to {
+        background-position: 0 0, 140px 0;
+      }
+    }
+
+    @keyframes planeSweep {
+      from {
+        background-position: 0% 50%;
+        transform: translateY(-2%) rotate(-8deg) skewY(-2deg);
+      }
+      to {
+        background-position: 100% 50%;
+        transform: translateY(5%) rotate(-8deg) skewY(-2deg);
+      }
+    }
+
+    @keyframes coreFloat {
+      from {
+        transform: translate3d(0, -3%, 0) scale(0.96);
+      }
+      to {
+        transform: translate3d(-8%, 6%, 0) scale(1.08);
+      }
+    }
+
+    @keyframes beamFall {
+      from {
+        transform: translateY(-42vh) rotate(-9deg);
+      }
+      to {
+        transform: translateY(62vh) rotate(-9deg);
+      }
+    }
+
+    @keyframes gridMove {
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: 0 72px;
+      }
+    }
+
+    @keyframes reelScroll {
+      from {
+        transform: translateY(-20%) rotate(12deg);
+      }
+      to {
+        transform: translateY(10%) rotate(12deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+    @media (max-width: 860px) {
+      /* Performance: animated filter:blur() layers are expensive to repaint on mobile
+         GPUs. Freezing/simplifying the decorative hero layers removes the scroll jank
+         without changing the desktop experience. */
+      .hero::before,
+      .hero-media::before,
+      .hero-media::after,
+      .motion-plane,
+      .beam,
+      .aura-core {
+        animation: none;
+      }
+
+      .hero::before {
+        filter: blur(2px);
+      }
+
+      .hero-media::before {
+        filter: blur(10px) saturate(1.15);
+      }
+
+      .aura-core {
+        filter: blur(6px);
+      }
+
+      .reel {
+        animation-duration: 40s;
+      }
+
+      .nav,
+      .button,
+      .about-copy,
+      .stat,
+      .work-grid,
+      .contact-card,
+      form {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+      }
+
+      .section {
+        content-visibility: auto;
+        contain-intrinsic-size: 1px 900px;
+      }
+
+      .site-header {
+        inset: 12px 0 auto;
+      }
+
+      .nav {
+        border-radius: 24px;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: 92svh;
+        padding-top: 118px;
+      }
+
+      .hero-content {
+        gap: 20px;
+      }
+
+      .aura-core {
+        width: 82vw;
+        right: -12vw;
+        top: 18vh;
+      }
+
+      .motion-plane {
+        height: 58vh;
+      }
+
+      .section {
+        padding: 78px 18px;
+      }
+
+      .section-head,
+      .about-grid,
+      .contact-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .work-card {
+        min-height: 380px;
+      }
+
+      .scroll-note {
+        display: none;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .nav {
+        width: min(calc(100% - 20px), var(--max));
+        padding-left: 12px;
+      }
+
+      .brand {
+        font-size: 14px;
+      }
+
+      .cta {
+        min-height: 36px;
+        padding: 0 13px;
+      }
+
+      h1 {
+        font-size: clamp(2.6rem, 12vw, 3.6rem);
+        line-height: 1.05;
+      }
+
+      .hero-tagline {
+        font-size: 1rem;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .reel {
+        width: 42vw;
+        min-width: 150px;
+      }
+
+      .motion-plane.secondary,
+      .beam.three {
+        display: none;
+      }
+
+      .reel:nth-child(2) {
+        left: 52vw;
+      }
+
+      .reel:nth-child(3) {
+        display: none;
+      }
+
+      .frame {
+        min-height: 170px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" aria-label="Primary navigation">
+    <nav class="nav">
+      <a class="brand" href="#top" aria-label="iCreate home">
+        <span class="brand-mark">i</span>
+        <span>iCreate</span>
+      </a>
+      <div class="nav-links" aria-label="Page sections">
+        <a href="#about">About</a>
+        <a href="#works">Works</a>
+        <a href="games.html" target="_blank" rel="noopener">Games</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="cta" href="#contact">Start a Project</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-media" aria-hidden="true">
+        <span class="aura-core"></span>
+        <span class="motion-plane"></span>
+        <span class="motion-plane secondary"></span>
+        <span class="beam one"></span>
+        <span class="beam two"></span>
+        <span class="beam three"></span>
+        <div class="reel">
+          <span class="frame f1"></span>
+          <span class="frame f2"></span>
+          <span class="frame f3"></span>
+          <span class="frame f4"></span>
+        </div>
+        <div class="reel">
+          <span class="frame f3"></span>
+          <span class="frame f4"></span>
+          <span class="frame f1"></span>
+          <span class="frame f2"></span>
+        </div>
+        <div class="reel">
+          <span class="frame f2"></span>
+          <span class="frame f1"></span>
+          <span class="frame f4"></span>
+          <span class="frame f3"></span>
+        </div>
+      </div>
+
+      <div class="hero-content">
+        <h1 id="hero-title">Crafting Experiences Beyond Games</h1>
+        <p class="hero-tagline">
+          A home for everything I Create
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#works">View Works</a>
+          <a class="button" href="#about">Meet Ivan</a>
+        </div>
+      </div>
+      <span class="scroll-note">Scroll</span>
+    </section>
+
+    <section class="section reveal" id="about" aria-labelledby="about-title">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2 id="about-title">About Me</h2>
+          <p class="lead">
+            A designer focused on mechanics that are easy to read, satisfying to master, and memorable long after the screen fades.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-copy">
+            <p>
+              I'm Ivan, a game developer and designer who enjoys turning ideas into interactive experiences. I build games in Unity, with a strong focus on clean architecture, thoughtful systems, and technical problem-solving, while also exploring level design, concept art, and 3D modeling. I enjoy working where creativity and technology intersect, bringing ideas to life through both design and development.
+            </p>
+            <p>
+              Beyond games, I'm passionate about storytelling through writing, worldbuilding, and music. Whether I'm sketching, playing the guitar or ukulele, or working on new stories and creative projects, I'm always exploring new ways to create meaningful experiences and grow as a multidisciplinary creator.
+            </p>
+            <div class="tags" aria-label="Interests and skills">
+              <span class="tag">Game Systems</span>
+              <span class="tag">Level Design</span>
+              <span class="tag">Asset Production</span>
+              <span class="tag">Texturing</span>
+              <span class="tag">Prototyping</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="works" aria-labelledby="works-title">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2 id="works-title">Portfolio</h2>
+          <p class="lead">
+            An overview of everything I've brought to the table so far...
+          </p>
+        </div>
+
+        <div class="work-grid">
+          <a class="work-card w1" href="concept-art.html" target="_blank" rel="noopener">
+            <div class="work-content">
+              <h3>Art</h3>
+              <p>Art ranging from characters to environments, comics to 3d assets, texturing to ui design</p>
+            </div>
+          </a>
+
+          <a class="work-card w2" href="game-systems.html" target="_blank" rel="noopener">
+            <div class="work-content">
+              <h3>Game Systems</h3>
+              <p>Simple and complex systems designed while keeping in mind player feel and feedback</p>
+            </div>
+          </a>
+
+          <a class="work-card w3" href="game-design-documentation.html" target="_blank" rel="noopener">
+            <div class="work-content">
+              <h3>Game Design Documentation</h3>
+              <p>A Game Design Document is a compass as it keeps every creative decision pointed toward the same destination.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="contact" aria-labelledby="contact-title">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2 id="contact-title">Contact</h2>
+          <p class="lead">
+            Have a collaboration, prototype, or game idea in mind? Send a note and start the conversation.
+          </p>
+        </div>
+
+        <div class="contact-wrap">
+          <aside class="contact-card">
+            <p>
+              Available for game design projects, portfolio reviews, prototypes, and creative collaborations.
+            </p>
+            <div class="contact-links">
+              <a href="mailto:02.pereira.ivan@gmail.com">02.pereira.ivan@gmail.com</a>
+              <a href="https://www.linkedin.com/in/ivan-pereira-a14696318" target="_blank" rel="noopener" aria-label="Ivan on LinkedIn">LinkedIn</a>
+              <a href="#" aria-label="Ivan on ArtStation">ArtStation</a>
+            </div>
+          </aside>
+
+          <form action="#" method="post">
+            <label>
+              Name
+              <input type="text" name="name" placeholder="Your name" autocomplete="name" />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="you@example.com" autocomplete="email" />
+            </label>
+            <label>
+              Message
+              <textarea name="message" placeholder="Tell me about the project"></textarea>
+            </label>
+            <button class="submit" type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>iCreate by Ivan</span>
+      <span>Game design, systems, and interactive direction.</span>
+    </div>
+  </footer>
+</body>
+</html>

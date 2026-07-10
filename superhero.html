@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Superhero | iCreate</title>
+  <style>
+    :root {
+      --bg: #050605;
+      --text: #f4f7ef;
+      --muted: #a7afa3;
+      --line: rgba(244, 247, 239, 0.13);
+      --accent: #76ff67;
+      --accent-2: #d8ff72;
+      --warm: #ff8664;
+      --cool: #8bd6ff;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--bg); }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 14% 12%, rgba(118, 255, 103, 0.12), transparent 28rem),
+        radial-gradient(circle at 82% 18%, rgba(255, 134, 100, 0.1), transparent 24rem),
+        radial-gradient(circle at 58% 78%, rgba(139, 214, 255, 0.08), transparent 30rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .page { position: relative; overflow: hidden; }
+
+    .page::before {
+      content: "";
+      position: fixed;
+      inset: -20%;
+      z-index: -2;
+      background:
+        conic-gradient(from 140deg at 50% 50%, transparent, rgba(118, 255, 103, 0.18), rgba(139, 214, 255, 0.08), rgba(255, 134, 100, 0.16), transparent),
+        radial-gradient(circle at 50% 35%, rgba(216, 255, 114, 0.12), transparent 22rem);
+      filter: blur(28px) saturate(1.2);
+      animation: aura 24s linear infinite;
+      opacity: 0.72;
+    }
+
+    .page::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(244, 247, 239, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 247, 239, 0.035) 1px, transparent 1px);
+      background-size: 92px 92px;
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
+      opacity: 0.5;
+    }
+
+    .nav {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 18px auto 0;
+      padding: 10px 10px 10px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(5, 6, 5, 0.7);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #061006;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font-size: 14px;
+    }
+
+    .back {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 18px;
+      border-radius: 999px;
+      color: #071006;
+      background: var(--text);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .hero, .study, .footer { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
+
+    .hero {
+      min-height: 66svh;
+      padding: 108px 0 78px;
+      display: grid;
+      align-items: end;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-size: 0.86rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    h1, h2, h3, p, figure { margin-top: 0; }
+
+    h1 {
+      max-width: 980px;
+      margin-bottom: 26px;
+      font-size: clamp(3.45rem, 9vw, 8.2rem);
+      line-height: 0.9;
+      letter-spacing: 0;
+    }
+
+    .intro {
+      max-width: 920px;
+      margin-bottom: 0;
+      color: #d8ded2;
+      font-size: clamp(1rem, 1.6vw, 1.22rem);
+    }
+
+    .intro + .intro { margin-top: 18px; }
+
+    .study {
+      padding: 70px 0 96px;
+      border-top: 1px solid var(--line);
+    }
+
+    .study-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(260px, 0.52fr);
+      gap: 36px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(2.3rem, 5vw, 4.8rem);
+      line-height: 0.95;
+    }
+
+    .lead {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 16px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(118, 255, 103, 0.14), transparent 18rem),
+        radial-gradient(circle at 82% 20%, rgba(255, 134, 100, 0.1), transparent 18rem),
+        rgba(244, 247, 239, 0.035);
+      backdrop-filter: blur(18px);
+    }
+
+    .piece {
+      grid-column: span 6;
+      margin-bottom: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(5, 6, 5, 0.68);
+    }
+
+    .piece.is-wide { grid-column: span 12; }
+
+    .piece img {
+      width: 100%;
+      height: clamp(360px, 58vw, 760px);
+      display: block;
+      object-fit: contain;
+      background:
+        linear-gradient(rgba(244, 247, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 247, 239, 0.03) 1px, transparent 1px),
+        #080a08;
+      background-size: 48px 48px;
+    }
+
+    .piece:not(.is-wide) img {
+      height: clamp(300px, 38vw, 560px);
+    }
+
+    figcaption {
+      padding: 14px 16px 15px;
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      border-top: 1px solid var(--line);
+      background: rgba(5, 6, 5, 0.74);
+    }
+
+    .footer {
+      padding: 28px 0 44px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 860px) {
+      .study-head { grid-template-columns: 1fr; gap: 14px; }
+      .piece, .piece.is-wide { grid-column: span 12; }
+    }
+
+    @media (max-width: 640px) {
+      .nav { width: min(calc(100% - 24px), var(--max)); }
+      .brand { font-size: 14px; }
+      .back { min-height: 36px; padding: 0 13px; }
+      .hero, .study, .footer { width: min(calc(100% - 28px), var(--max)); }
+      .hero { min-height: 60svh; padding-top: 76px; }
+      .gallery { padding: 10px; gap: 10px; }
+      .piece img, .piece:not(.is-wide) img { height: clamp(260px, 82vw, 520px); }
+      figcaption { padding: 12px 13px; font-size: 0.76rem; }
+    }
+
+    @keyframes aura { from { transform: rotate(0deg) scale(1); } to { transform: rotate(360deg) scale(1.04); } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav" aria-label="Superhero navigation">
+      <a class="brand" href="concept-art.html">
+        <span class="brand-mark">i</span>
+        <span>iCreate</span>
+      </a>
+      <a class="back" href="concept-art.html#characters">Back</a>
+    </nav>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Character Study 1</p>
+          <h1 id="page-title">Superhero</h1>
+          <p class="intro">For the superhero assignment, we were tasked with creating 10 superhero masks and the lore behind each mask. This included establishing why the superhero was needed, providing a compelling reason for them to wear a mask beyond simply concealing their identity, and defining the goals they sought to accomplish as masked superheroes.</p>
+          <p class="intro">We also had the option of creating supervillains for the assignment. As a group, we decided to build a shared universe where all 10 superheroes and supervillains could coexist. To give the characters a sense of cohesion, we developed interconnected backstories and a common world that tied each of them together as part of the same universe.</p>
+          <p class="intro">My contribution to this project was the creation of three of the ten masks, including their concepts, backstories, and roles within the shared universe.</p>
+        </div>
+      </section>
+
+      <section class="study" aria-labelledby="war-general-title">
+        <div class="study-head">
+          <h2 id="war-general-title">The War General</h2>
+          <p class="lead">Boar mask development, arranged from story foundation through final render.</p>
+        </div>
+        <div class="gallery">
+          <figure class="piece is-wide">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczPS-YvpgEE1AL3p_U--ViX9eyN92vJp2e7SvksYEAihICHGgxNGJOnY9sxxgga6AFUvwRnkBVPvmwcOjnswfPm9k7bRVzewqZMgNU6el4KOIYkOaRGGaTNgvV7vMgeSR10JWGcTTwEYvyjIR9ZJJAo=w1888-h1059-s-no-gm?authuser=2" alt="The War General lore sheet" />
+            <figcaption>Lore</figcaption>
+          </figure>
+          <figure class="piece">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczMZW-aIuozpAoSpPWteWDnz_0rnWlkmPx87haL97Hp7FYa2T3gAVTkqCh3HM0qcavwXUefWyGBr2AHY-LUADb8gRYtVLca8pIU_BxoSIm44kuh0U510jJRXnLqIwMi9BdF94Wdcy77gM448vcogmf8=w1878-h1033-s-no-gm?authuser=2" alt="The War General reference board" />
+            <figcaption>References</figcaption>
+          </figure>
+          <figure class="piece">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczNib7eGiuPvyF5o3f-XTJ-sXI8AuaMdPbkiNnd3u020FWzR7SXw4ZtyDkmGP-b-iEIToZN95KJXC8mcJsqKL1EVfRjYqrCmyUpH0cx-QLfKwbdP3KQWyLRoD0gcYT69B3uLcOnhOoOwJXC0ADTSFvg=w1489-h1285-s-no-gm?authuser=2" alt="The War General sketch" />
+            <figcaption>Sketch</figcaption>
+          </figure>
+          <figure class="piece">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczNkK0VjMrxqnbE2Tm3Ur6peOthKwk-xbhlfbV5I1UcZVDaNgmt2MjoX7tp4NUp47wctjAAjGUQtLbJkmJKu15JMYmh6XFmqIBMn7ZmTzA2VhyHduOGXgwdgiUnwhaUImOP0iCL8PQo6LVTLLZYi9mo=w1495-h1330-s-no-gm?authuser=2" alt="The War General line art" />
+            <figcaption>Line Art</figcaption>
+          </figure>
+          <figure class="piece">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczOpeqvSVjGARhRqzzyLwxvU1YID_7_xI3x014FzlR5c-E80qsZsKD1ZVG_Pw_xkK1pZZzjtm-wcNgx2MgA9R_T6e93ZBgNBcAoae42I5yGNSYsLM4nMy0GtT_IcDA9CuIvqWxZggja19rMyVtMXkMA=w2176-h1319-s-no-gm?authuser=2" alt="The War General final render" />
+            <figcaption>Final</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="study" aria-labelledby="animalist-title">
+        <div class="study-head">
+          <h2 id="animalist-title">The Animalist</h2>
+          <p class="lead">Animalist mask development, shown in the same production sequence.</p>
+        </div>
+        <div class="gallery">
+          <figure class="piece is-wide">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczPrsBBqicIYEKYBgg15A9VwnVHxCGQia3Txhihf9u7Qx-9lX_6Gw--O3bMy5GvXOVNZJKK_3VjjTtSJDdCqYFDvgBuxqYlzn1lweUsTSChE7_5tWB-sX9qvm-ILa3xZa7mXsK9wJ1gNPBApNg1D4LA=w1875-h1041-s-no-gm?authuser=2" alt="The Animalist lore sheet" />
+            <figcaption>Lore</figcaption>
+          </figure>
+          <figure class="piece">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczPqJN_ReRtPbd4FDvbvscPeZdVQhLK87e4uUzTnaXmeajPfXfjwliMc3hOAyUT8IsF3nU_huo9U46Ds1w17EXPvxO3Z5H6qDuYyGaZ2hZJhwrnNliMaOjlsiwMkCPqS10PUVt4ut1GUJfdHg1rsIfg=w1866-h1021-s-no-gm?authuser=2" alt="The Animalist reference board" />
+            <figcaption>References</figcaption>
+          </figure>
+          <figure class="piece">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczP-aL0B_xgZCDT4vZoQ1DitFvTxfu9Iv5qV9ATkghqw3DZxhZsZyeYFZwtWdHSWo86IpNaG29X5fiJMCTFwZ0TzYD2bJScDouzb1bVTsxelBYNbU8eZWvFomuAYa-OfCZA5lBMKVs7wOzQ-vCobaMk=w904-h922-s-no-gm?authuser=2" alt="The Animalist sketch" />
+            <figcaption>Sketch</figcaption>
+          </figure>
+          <figure class="piece">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczMPeT7uOUfx4FDgR_zslq0Fme6GDh6M7rkh-Xcuwjjwcvw9Lns2BerHjDs5Zwt6AGqTxx14M8DRErcSEl5khU9CFCF_1b7rx_wQc99GQgT5zBAaZWAXyhmcAZkj-jzgIneKHgq4nkzlfI5bWCdtwBo=w919-h1279-s-no-gm?authuser=2" alt="The Animalist line art" />
+            <figcaption>Line Art</figcaption>
+          </figure>
+          <figure class="piece">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczMvFTQ-K7Z7UXkY8vHwJLySSf9xkSjjNP4jouKMmErcFbUN0UaK-4BTTx45CYBu8jjSFFmnpOSDEP5h7ZqICrOt4M8b3HscEIhVVKHefPrhPsN3HCXPsJxsm8ppPrblAlQMY3268_8eN_3bJK39MdM=w1790-h1347-s-no-gm?authuser=2" alt="The Animalist final render" />
+            <figcaption>Final</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="study" aria-labelledby="bonebound-title">
+        <div class="study-head">
+          <h2 id="bonebound-title">The Bonebound</h2>
+          <p class="lead">Bonebound concept work, moving from lore to visual references to the completed render.</p>
+        </div>
+        <div class="gallery">
+          <figure class="piece is-wide">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczOQ116gOBgnZT-VNJWqkscLVCk6sukkCgaJ5sO0pEh4MlFSDcS5af6cTGKzSSrsVx0P8f1yock9i3pWfN8eUp4XoYrKqte2Jiau9DQFXYm1didnowVPPZMFonBDMun6Mn5bYbpsqCahdhg_Sj4aZ3w=w1872-h1027-s-no-gm?authuser=2" alt="The Bonebound lore sheet" />
+            <figcaption>Lore</figcaption>
+          </figure>
+          <figure class="piece">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczM6W4tBAH2uUi864yKoBq5ooM6AmvDAqx9Rn10c2xRWCD2RwXwNBMiuq9WoD1PWJvolYVQM3Z3sVIpVncxm11DuK7Q2UNx64hf_QvFia1O6PzR3fRWhWvmvil2EUMSwiQfgXCxJxF2lm8HkkJkCNTQ=w1783-h969-s-no-gm?authuser=2" alt="The Bonebound reference board" />
+            <figcaption>References</figcaption>
+          </figure>
+          <figure class="piece">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczNs9rg2WKeSQCNHYIg_NK7Cbx0wLciT25_YzOTYua7KvC2AYSuURqpF1whIF4Tq-7d4YFAQ_Hlhoxnm21yqciy2NO5W7K7XlvTag-WDkwSc7k9iEPx12NFPhCjmjMHhZI_UvFmNDCvh_JL5bJI6LNE=w1811-h1347-s-no-gm?authuser=2" alt="The Bonebound final render" />
+            <figcaption>Final Render</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>iCreate | Superhero</p>
+    </footer>
+  </div>
+</body>
+</html>

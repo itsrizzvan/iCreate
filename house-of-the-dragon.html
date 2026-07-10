@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indianized House of the Dragon Concept Art | iCreate</title>
+  <style>
+    :root {
+      --bg: #050605;
+      --text: #f4f7ef;
+      --muted: #a7afa3;
+      --line: rgba(244, 247, 239, 0.13);
+      --accent: #76ff67;
+      --accent-2: #d8ff72;
+      --warm: #ff8664;
+      --cool: #8bd6ff;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--bg); }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 14% 12%, rgba(118, 255, 103, 0.12), transparent 28rem),
+        radial-gradient(circle at 82% 18%, rgba(255, 134, 100, 0.1), transparent 24rem),
+        radial-gradient(circle at 58% 78%, rgba(139, 214, 255, 0.08), transparent 30rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .page { position: relative; overflow: hidden; }
+
+    .page::before {
+      content: "";
+      position: fixed;
+      inset: -20%;
+      z-index: -2;
+      background:
+        conic-gradient(from 140deg at 50% 50%, transparent, rgba(118, 255, 103, 0.18), rgba(139, 214, 255, 0.08), rgba(255, 134, 100, 0.16), transparent),
+        radial-gradient(circle at 50% 35%, rgba(216, 255, 114, 0.12), transparent 22rem);
+      filter: blur(28px) saturate(1.2);
+      animation: aura 24s linear infinite;
+      opacity: 0.72;
+    }
+
+    .page::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(244, 247, 239, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 247, 239, 0.035) 1px, transparent 1px);
+      background-size: 92px 92px;
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
+      opacity: 0.5;
+    }
+
+    .nav {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 18px auto 0;
+      padding: 10px 10px 10px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(5, 6, 5, 0.7);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #061006;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font-size: 14px;
+    }
+
+    .back {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 18px;
+      border-radius: 999px;
+      color: #071006;
+      background: var(--text);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .hero, .study, .footer { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
+
+    .hero {
+      min-height: 66svh;
+      padding: 108px 0 78px;
+      display: grid;
+      align-items: end;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-size: 0.86rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    h1, p, figure { margin-top: 0; }
+
+    h1 {
+      max-width: 1040px;
+      margin-bottom: 26px;
+      font-size: clamp(3.05rem, 8vw, 7.6rem);
+      line-height: 0.9;
+      letter-spacing: 0;
+    }
+
+    .intro {
+      max-width: 920px;
+      margin-bottom: 0;
+      color: #d8ded2;
+      font-size: clamp(1rem, 1.6vw, 1.22rem);
+    }
+
+    .intro + .intro { margin-top: 18px; }
+
+    .study {
+      padding: 70px 0 96px;
+      border-top: 1px solid var(--line);
+    }
+
+    .pdf-gallery {
+      display: grid;
+      gap: 22px;
+    }
+
+    .page-card {
+      margin-bottom: 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(118, 255, 103, 0.12), transparent 18rem),
+        radial-gradient(circle at 82% 20%, rgba(255, 134, 100, 0.08), transparent 18rem),
+        rgba(244, 247, 239, 0.035);
+      backdrop-filter: blur(18px);
+    }
+
+    .page-card img {
+      width: 100%;
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #080a08;
+    }
+
+    .download-line {
+      margin: 24px 0 0;
+      color: #d8ded2;
+      font-size: clamp(1rem, 1.6vw, 1.14rem);
+    }
+
+    .download-line a {
+      color: var(--accent-2);
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .footer {
+      padding: 28px 0 44px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 640px) {
+      .nav { width: min(calc(100% - 24px), var(--max)); }
+      .brand { font-size: 14px; }
+      .back { min-height: 36px; padding: 0 13px; }
+      .hero, .study, .footer { width: min(calc(100% - 28px), var(--max)); }
+      .hero { min-height: 60svh; padding-top: 76px; }
+      .page-card { padding: 9px; }
+      .pdf-gallery { gap: 14px; }
+    }
+
+    @keyframes aura { from { transform: rotate(0deg) scale(1); } to { transform: rotate(360deg) scale(1.04); } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav" aria-label="Indianized House of the Dragon navigation">
+      <a class="brand" href="concept-art.html">
+        <span class="brand-mark">i</span>
+        <span>iCreate</span>
+      </a>
+      <a class="back" href="concept-art.html#characters">Back</a>
+    </nav>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Character Study 2</p>
+          <h1 id="page-title">Indianized House of the Dragon Concept Art</h1>
+          <p class="intro">For this assignment, we were tasked with creating concept art for two characters from a game or television series of our choice. The process began with selecting a game or series, followed by choosing two characters. We then conducted extensive reference collection for both characters, created black-and-white renders exploring a variety of poses, and experimented with different colour schemes and palettes. After selecting the strongest combination of pose and colour scheme, we produced a final rendered illustration with an optional background.</p>
+          <p class="intro">For our project, we chose House of the Dragon as the source material, with Daemon Targaryen and Caraxes as our selected characters. We reimagined them within the Gupta period of Indian history, adapting their designs to reflect the aesthetics, attire, and cultural influences of that era before following the complete concept art pipeline.</p>
+        </div>
+      </section>
+
+      <section class="study" aria-label="Indianized House of the Dragon concept art slides">
+        <div class="pdf-gallery">
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczP6syA_QybaoCGKsHJod4CYIoAugBHnisQH8wxWGPWJTKJzselc-qQcw33ID_zSRrO4-mKO8qr7DgvHWT4roAdkpn5J=w2314-h1303-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 1" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczNSdDrTI3Kw-9kB3azTwYHy04POqRQbN7O2BYJnmnTmNEiBRNicxfY=w2316-h1299-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 2" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczO2Ft_gpUxZ5ZCXfeBcAhbpbqHQCRYwK82WDsgkKxfGMsxPub1Notw=w2314-h1303-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 3" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczMw5GTkGh1zyHKM3CFXYJA2DBLA3mmKsxZJm0mZUBEEfMjRs7iyWsI=w2311-h1302-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 4" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczPHikQf-JeTnt3SgcdIfjO_k66I6B6m3n2N0R3eyyiqzj06WaV5Ll4=w2314-h1300-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 5" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczMwDV9vljHAoqljHb7l37c4CN_pC6WrfjOnlQWg8OXIFHrVpGXZMMw=w2314-h1300-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 6" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczO0rVWI-9goSP36YrHEz3UY37Sv8pz0gqNGtUJkkV1VgRp_UP8HcqF1-8el34mj__UN4c14eLa_O2SmGkC3iLm5VdUm=w2311-h1302-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 7" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczOp4rTMsWnkc_qhOHjgaQzvBEEoF30B3m33PVSQsWHjhh6wjbFjQt4=w2314-h1297-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 8" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczMiFIYcIgIgSAUYmPqKDpz_5dIBbsx0fAfxYN-3dMk-tXVDurU5uSkpt4LzhKO51ccy7QKhuxgY9SrmUujk4maffchZ=w2314-h1300-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 9" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczOZTcR8qabQdkQZUaOXmkWG4t3lzAheO3tztj6I5wU1rs-RaxPt3XU=w2314-h1299-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 10" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczOG8Oy_bCpb4iHh9UcHBe3T-muW1M_3QvqHDkt6OQ2I2eCK2GJa_zw=w2311-h1300-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 11" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczPDrrRNMCXuID2pPq5beR0WMx3nsWXiuuTDycpBVoANoCMdqN4aMtM=w2314-h1300-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 12" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczNB8ec7vYWjacBixW7mRahUrOuFgdIOq9fUpsaSXeVu0J6cH1qO0S0=w2317-h1302-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 13" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczMWHDp1eRKoMvr1XK_ztI0CJ8BcKCw1KCMMSjQot8T_H2ivnOW_eyo=w2314-h1299-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 14" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczMtVRK1KUqCVBu8MfDU02lkjNNMLL2nh6kBE2xmggE8kWMYsNAX3lM=w2317-h1302-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 15" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczOKocUldilnj0uhez0eXLxWli2fF_iWa6MiVy2xsNZd-rfHC4feHkqfZ73caXEmK4SVR3p0inlDLpan13Tiy61gQC3m=w2314-h1302-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 16" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczNG8MeDvM1uXRWB_HvduXsxKml1K0i3XqgLZbqioV7ENG-69A943I1JQzEguzUnENCuAB4-P1YBFJfSIKcadgCg16JJ=w2314-h1300-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 17" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczOfCLBpMBpDQ999yq-nvPzI_VDEQ2-b3FnbhVJg_oJ5-Fp8JddYZX8=w2314-h1299-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 18" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczM1bUWuENIthLDqsyCyO6rpizVQ881YJsxtxaH4v-AvHHXcctlm3OA=w2314-h1303-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 19" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczMnvVvLS1GQdmZOjW1N2TcNmBi6Jcnto6pUD-NpxzcV26UHxinbnEE=w2311-h1303-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 20" loading="lazy" /></figure>
+        </div>
+        <p class="download-line">Download pdf: <a href="https://drive.google.com/file/d/12_zHlpdo9-804upVrtXVBnlGel45IN15/view?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/file/d/12_zHlpdo9-804upVrtXVBnlGel45IN15/view?usp=sharing</a></p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>iCreate | Character concept art</p>
+    </footer>
+  </div>
+</body>
+</html>
