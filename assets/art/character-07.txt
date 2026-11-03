@@ -1,0 +1,5 @@
+FISH(no kidding)
+
+Tools: Adobe Photoshop
+
+Designed some fish concept arts for our Boat Taxi Game where fishing was the primary gameplay mechanic. We had 3 classes of fish, them being Mild, Passive and Aggressive and these designs are for the Aggressive kind, that attack the player's boat but also reward generously when caught.

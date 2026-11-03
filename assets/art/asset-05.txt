@@ -1,0 +1,5 @@
+AUTOMATED DEFENCE TURRET
+
+Tools: Blender
+
+This sentry was hand-painted in Blender and is in an altogether different color scheme(neon-esque) to distinguish it from the landscape and make traversal easier for the Player in this car shooter game.

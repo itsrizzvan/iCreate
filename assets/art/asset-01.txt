@@ -1,0 +1,5 @@
+BULL-$H1T: PIXELATED DELOREAN CAR
+
+Tools: Blender
+
+Textured this DeLorean car in a pixelated art style. The look you see is completely hand-painted in Blender. This was then taken to Unity and used as one of the assets for a Car shooter game.

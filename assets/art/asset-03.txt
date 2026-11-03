@@ -1,0 +1,5 @@
+REDLINE: PICKUP TRUCK
+
+Tools: Blender
+
+Textured this pickup truck in a pixelated art style that would serve as the player car in a car shooter game. The hand-painted look was achieved using the Texture Paint feature in Blender.

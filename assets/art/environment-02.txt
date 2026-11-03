@@ -1,0 +1,5 @@
+LOW-POLY CITY
+
+Tools: Blender
+
+As one of my earliest Blender ventures, I modeled and textured(although with base materials) this low-poly city. As I was just starting out, I had no idea of the rights or wrongs of blender and if I had to remake this, I would definitely do a much better job at it.

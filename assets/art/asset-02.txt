@@ -1,0 +1,5 @@
+CHUTNEY: INTERCEPTOR COMBAT CAR
+
+Tools: Blender
+
+Textured this combat car that would frequently intercept the player car in a Car shooter game. This hand-painted look was achieved in Blender, completely texture-painted, with the inspiration being the Creeper from Minecraft.

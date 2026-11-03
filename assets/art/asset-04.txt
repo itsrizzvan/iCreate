@@ -1,0 +1,5 @@
+IRONCLAD: HEAVY ASSAULT TANK
+
+Tools: Blender
+
+This Tank was texture painted in Blender and was used in a Car Shooter game as one of the main boss cars. It has a similar texture style as Chutney, the Interceptor Combat Car.
