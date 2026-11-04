@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="iCreate | Ivan's portfolio of game design, systems, documentation and art." />
+  <meta name="theme-color" content="#07070d" />
+  <title>iCreate | Ivan Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+:root{--bg:#07070d;--text:#ecebf5;--muted:#9a9bb5;--line:rgba(236,235,245,.12);--a:139,92,255;--b:61,232,255;
+--accent:rgb(var(--a));--accent-2:rgb(var(--b));--max:1120px;
+--f-d:"Space Grotesk",Inter,system-ui,sans-serif;--f-b:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;--f-m:"JetBrains Mono",ui-monospace,Menlo,monospace}
+body[data-view=art],body[data-view=superhero],body[data-view=house-of-the-dragon],body[data-view=dystopian-india]{--a:255,92,170;--b:255,180,84}
+body[data-view=games],body[data-view=game-systems],body[data-view=game-design-documentation]{--a:61,232,255;--b:139,92,255}
+*{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;min-height:100vh;color:var(--text);background:var(--bg);font:400 1rem/1.7 var(--f-b);overflow-x:hidden;-webkit-font-smoothing:antialiased;counter-reset:sec}
+a{color:inherit;text-decoration:none}h1,h2,h3,p,figure{margin-top:0}button,input,textarea{font:inherit}
+::selection{background:rgba(var(--a),.4)}main{position:relative;overflow-x:clip}
+h1,h2,h3{font-family:var(--f-d);letter-spacing:-.02em}
+/* stage: videos + generated motion graphics */
+.stage{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:var(--bg)}
+.stage::before{content:"";position:absolute;inset:-25%;background:radial-gradient(circle at 25% 30%,rgba(var(--a),.28),transparent 32rem),radial-gradient(circle at 78% 62%,rgba(var(--b),.18),transparent 30rem);filter:blur(30px);animation:drift 26s ease-in-out infinite alternate}
+.stage::after{content:"";position:absolute;inset:0;background:radial-gradient(520px circle at var(--mx,50%) var(--my,30%),rgba(var(--a),.11),transparent 62%)}
+.bgv{position:absolute;inset:-6%;width:112%;height:112%;object-fit:cover;opacity:0;transition:opacity 1.4s;mix-blend-mode:screen;filter:saturate(1.2) contrast(1.05);will-change:transform}
+.bgv.on{opacity:.26}#fx{position:absolute;inset:0;opacity:.8}
+.vig{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 35%,rgba(7,7,13,.85))}
+.grain{position:absolute;inset:0;opacity:.07;mix-blend-mode:overlay;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@keyframes drift{to{transform:translate3d(4%,-3%,0) rotate(8deg) scale(1.08)}}
+.xp{position:fixed;inset:0 0 auto;height:3px;z-index:30;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 0 14px rgba(var(--a),.7)}
+.orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(2px);z-index:0;background:radial-gradient(circle at 35% 30%,rgba(var(--b),.55),rgba(var(--a),.18) 55%,transparent 70%);will-change:transform}
+/* nav */
+.site-header{position:fixed;inset:16px 0 auto;z-index:20;pointer-events:none}
+.nav{width:min(calc(100% - 32px),var(--max));margin:0 auto;padding:8px 8px 8px 16px;display:flex;align-items:center;justify-content:space-between;gap:18px;background:rgba(10,10,18,.6);border:1px solid var(--line);border-radius:999px;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);pointer-events:auto}
+.brand{display:inline-flex;align-items:center;gap:10px;font:700 .95rem var(--f-d)}
+.brand-mark{width:28px;height:28px;display:grid;place-items:center;border-radius:8px;color:#07070d;background:linear-gradient(135deg,var(--accent),var(--accent-2));font:700 .85rem var(--f-m);box-shadow:0 0 18px rgba(var(--a),.55)}
+.nav-links{display:flex;gap:2px;font-size:.85rem;color:var(--muted)}
+.nav-links a{padding:7px 14px;border-radius:999px;transition:.25s}.nav-links a:hover,.nav-links a.is-active{color:var(--text);background:rgba(236,235,245,.09)}
+.cta,.button{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 18px;border-radius:999px;font-weight:600;font-size:.85rem;transition:.25s}
+.cta{color:#07070d;background:var(--text)}.cta:hover{background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 0 24px rgba(var(--a),.5)}
+.button{min-height:46px;padding:0 24px;font-size:.92rem;border:1px solid var(--line);background:rgba(236,235,245,.05);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.button:hover{border-color:rgba(var(--a),.7);transform:translateY(-2px)}
+.button.primary{color:#07070d;border:0;background:linear-gradient(135deg,var(--accent),var(--accent-2))}.button.primary:hover{box-shadow:0 0 30px rgba(var(--a),.55)}
+/* views */
+.view[hidden]{display:none}.view:not([hidden]){animation:viewIn .5s ease-out}@keyframes viewIn{from{opacity:0}}
+[data-r]{opacity:0;translate:0 26px;transition:opacity .8s ease,translate .8s ease}[data-r].in{opacity:1;translate:0 0}
+.reveal{animation:none!important}
+[data-tilt]{position:relative;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))!important;transition:transform .15s ease-out,border-color .3s,opacity .8s,translate .8s!important}
+[data-tilt]::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(320px circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.12),transparent 60%)}
+[data-tilt]:hover::after{opacity:1}[data-tilt]:hover{border-color:rgba(var(--a),.6)!important}
+/* home */
+.home-hero{position:relative;min-height:100svh;padding:140px 24px 80px;display:grid;align-items:end;overflow:hidden}
+.hero-content{position:relative;z-index:1;width:min(100%,var(--max));margin:0 auto;display:grid;gap:22px}
+.home-hero h1{max-width:900px;margin:0;font-size:clamp(2.6rem,7vw,5.8rem);line-height:1.02;font-weight:700;background:linear-gradient(120deg,#fff 20%,rgb(var(--b)) 75%,rgb(var(--a)));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-tagline{max-width:520px;margin:0;color:var(--muted);font-size:1.1rem}
+.hero-tagline::before{content:"> ";color:var(--accent-2);font-family:var(--f-m)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.scroll-note{position:absolute;right:26px;bottom:30px;color:var(--muted);font:500 .68rem var(--f-m);text-transform:uppercase;letter-spacing:.2em;writing-mode:vertical-rl}
+.home-section{position:relative;padding:clamp(72px,10vw,120px) 24px;border-top:1px solid var(--line);scroll-margin-top:90px;background:linear-gradient(180deg,rgba(7,7,13,0),rgba(7,7,13,.5))}
+.section-inner{width:min(100%,var(--max));margin:0 auto}
+.home-section{counter-increment:sec}
+.home-head{display:grid;grid-template-columns:minmax(0,.9fr) minmax(240px,.7fr);gap:40px;align-items:end;margin-bottom:40px}
+.home-head::before{content:"0" counter(sec) " /";grid-column:1/-1;margin-bottom:-24px;color:var(--accent);font:500 .75rem var(--f-m);letter-spacing:.2em}
+.home-section h2{margin:0;font-size:clamp(2rem,4.4vw,3.6rem);line-height:1.05}
+.home-lead{margin:0;color:var(--muted);font-size:1.05rem}
+.about-copy,.contact-card,form{border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,rgba(236,235,245,.07),rgba(236,235,245,.02));-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.about-copy{padding:clamp(24px,4vw,40px);max-width:860px}.about-copy p{color:#cfd0e2;font-size:1.05rem}.about-copy p:last-of-type{margin-bottom:0}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.tag{padding:6px 12px;border:1px solid rgba(var(--a),.4);border-radius:6px;color:var(--text);background:rgba(var(--a),.1);font:500 .74rem var(--f-m);text-transform:uppercase;letter-spacing:.06em}
+.work-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.work-card{position:relative;min-height:400px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:#0a0b16}
+.work-card::before{content:"";position:absolute;inset:0;background:var(--image);transition:transform .6s ease}.work-card:hover::before{transform:scale(1.08)}
+.work-card>.work-content::before{content:"";position:absolute;inset:-120px 0 0;z-index:-1;background:linear-gradient(to bottom,transparent,rgba(7,7,13,.92))}
+.work-content{position:relative;z-index:1;padding:24px}.work-card h3{margin-bottom:8px;font-size:1.5rem;line-height:1.1}.work-card p{margin:0;color:#cfd0e2;font-size:.95rem}
+.w1{--image:radial-gradient(circle at 20% 18%,rgba(139,92,255,.85),transparent 30%),radial-gradient(circle at 80% 26%,rgba(61,232,255,.6),transparent 26%),linear-gradient(145deg,#0a0b16,#2a2a4a)}
+.w2{--image:linear-gradient(120deg,rgba(255,138,76,.85),transparent 36%),radial-gradient(circle at 70% 72%,rgba(255,92,170,.6),transparent 32%),linear-gradient(145deg,#1a1020,#3a2a3a)}
+.w3{--image:repeating-linear-gradient(115deg,rgba(236,235,245,.14) 0 1px,transparent 1px 18px),radial-gradient(circle at 50% 34%,rgba(61,232,255,.5),transparent 36%),linear-gradient(160deg,#07070d,#1f2038)}
+.contact-wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(280px,1fr);gap:22px;align-items:start}
+.contact-card{padding:clamp(22px,4vw,34px)}.contact-card p{color:var(--muted)}.contact-links{display:grid;gap:10px;margin-top:24px;font-size:.95rem}
+.contact-links a{padding-bottom:10px;border-bottom:1px solid var(--line);transition:.25s}.contact-links a:hover{color:var(--accent-2);padding-left:6px}
+form{display:grid;gap:14px;padding:clamp(20px,4vw,30px)}label{display:grid;gap:7px;color:var(--muted);font:500 .72rem var(--f-m);text-transform:uppercase;letter-spacing:.1em}
+input,textarea{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:8px;color:var(--text);background:rgba(7,7,13,.55);font:400 .95rem var(--f-b);text-transform:none;letter-spacing:0;outline:0;transition:.25s}
+textarea{min-height:130px;resize:vertical}input:focus,textarea:focus{border-color:rgb(var(--a));box-shadow:0 0 0 4px rgba(var(--a),.15)}
+.submit{min-height:48px;border:0;border-radius:999px;color:#07070d;background:linear-gradient(135deg,var(--accent),var(--accent-2));font-weight:700;cursor:pointer;transition:.25s}.submit:hover{box-shadow:0 0 28px rgba(var(--a),.5);transform:translateY(-2px)}
+.footer{padding:26px 24px 40px;border-top:1px solid var(--line);color:var(--muted);font:500 .75rem var(--f-m);letter-spacing:.04em;background:rgba(7,7,13,.6)}
+.footer-inner{width:min(100%,var(--max));margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media(max-width:860px){.home-head,.contact-wrap{grid-template-columns:1fr;gap:14px}.home-head::before{margin-bottom:0}.work-grid{grid-template-columns:1fr}.work-card{min-height:340px}.scroll-note{display:none}.home-hero{min-height:92svh;padding-top:130px}
+.nav{border-radius:22px;flex-wrap:wrap;gap:8px 16px}.brand{order:1}.cta{order:2;margin-left:auto}.nav-links{order:3;width:100%;justify-content:space-between;padding-top:6px;border-top:1px solid var(--line)}.nav-links a{padding:7px 10px}
+.stage::before{animation:none}.button{width:100%}.hero-actions{flex-direction:column}}
+/* ---- overview card grids (game systems / documentation / art) ---- */
+    .sub .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(139, 92, 255, 0.14), transparent 18rem),
+        radial-gradient(circle at 82% 20%, rgba(255, 138, 76, 0.1), transparent 18rem),
+        rgba(244, 247, 239, 0.035);
+      backdrop-filter: blur(18px);
+    }
+
+    .sub .card {
+      min-height: 260px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--art);
+      overflow: hidden;
+      position: relative;
+    }
+    .sub .card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 20%, rgba(5, 6, 5, 0.86)); }
+    .sub .card > * { position: relative; z-index: 1; }
+    .sub .card h3 { margin-bottom: 10px; font-size: 1.55rem; line-height: 1.05; }
+    .sub .card p { margin-bottom: 0; color: #cfd0e2; }
+
+    .sub .c1 { --art: radial-gradient(circle at 28% 22%, rgba(139, 92, 255, 0.72), transparent 28%), linear-gradient(145deg, #0f1020, #2a2a4a); }
+    .sub .c2 { --art: radial-gradient(circle at 72% 28%, rgba(139, 214, 255, 0.58), transparent 30%), linear-gradient(150deg, #0a0b16, #242444); }
+    .sub .c3 { --art: linear-gradient(125deg, rgba(255, 138, 76, 0.78), transparent 34%), radial-gradient(circle at 74% 68%, rgba(61, 232, 255, 0.66), transparent 28%), linear-gradient(145deg, #1a1020, #3a2a3a); }
+
+    /* art overview variant: clickable cards */
+    .grid-art .card { min-height: 300px; cursor: pointer; transition: transform 260ms ease, border-color 260ms ease; }
+    .grid-art .card:hover { transform: translateY(-4px); border-color: rgba(244, 247, 239, 0.32); }
+    .grid-art .card.large { grid-column: span 2; min-height: 380px; }
+    .grid-art .card::before {
+      background:
+        linear-gradient(to bottom, transparent 18%, rgba(5, 6, 5, 0.86)),
+        repeating-linear-gradient(115deg, rgba(244, 247, 239, 0.11) 0 1px, transparent 1px 18px);
+    }
+    .grid-art .c1 { --art: radial-gradient(circle at 34% 22%, rgba(244, 247, 239, 0.74), transparent 8%), radial-gradient(circle at 46% 38%, rgba(139, 92, 255, 0.62), transparent 28%), linear-gradient(145deg, #0f1020, #2a2a4a); }
+    .grid-art .c4 { --art: repeating-linear-gradient(90deg, rgba(244, 247, 239, 0.18) 0 1px, transparent 1px 22px), radial-gradient(circle at 26% 24%, rgba(139, 92, 255, 0.72), transparent 28%), linear-gradient(160deg, #07070d, #1f2038); }
+
+    /* ---- art: work list ---- */
+    .work-list { display: grid; gap: 26px; }
+
+    .work-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(244, 247, 239, 0.025);
+    }
+    a.work-item { transition: transform 260ms ease, border-color 260ms ease; }
+    a.work-item:hover, a.work-item:focus-visible { transform: translateY(-4px); border-color: rgba(244, 247, 239, 0.32); outline: none; }
+    .work-item:nth-child(even) { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); }
+    .work-item:nth-child(even) .work-visual { order: 2; }
+
+    .work-visual { min-height: 280px; background: var(--art); position: relative; overflow: hidden; }
+    .work-visual::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(115deg, rgba(244, 247, 239, 0.1) 0 1px, transparent 1px 18px); }
+
+    .work-text { padding: clamp(24px, 4vw, 40px); display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+    .sub .work-kicker { margin: 0; color: var(--accent); font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; }
+    .work-text h3 { margin-bottom: 0; font-size: clamp(1.3rem, 2.4vw, 1.7rem); }
+    .work-text p { margin-bottom: 0; color: var(--muted); }
+
+    .a1 { --art: radial-gradient(circle at 34% 22%, rgba(244, 247, 239, 0.74), transparent 8%), radial-gradient(circle at 46% 38%, rgba(139, 92, 255, 0.62), transparent 28%), linear-gradient(145deg, #0f1020, #2a2a4a); }
+    .a2 { --art: radial-gradient(circle at 68% 30%, rgba(139, 214, 255, 0.6), transparent 30%), linear-gradient(150deg, #0a0b16, #242444); }
+    .a3 { --art: linear-gradient(125deg, rgba(255, 138, 76, 0.78), transparent 34%), radial-gradient(circle at 74% 68%, rgba(61, 232, 255, 0.66), transparent 28%), linear-gradient(145deg, #1a1020, #3a2a3a); }
+    .a4 { --art: repeating-linear-gradient(90deg, rgba(244, 247, 239, 0.18) 0 1px, transparent 1px 22px), radial-gradient(circle at 26% 24%, rgba(139, 92, 255, 0.72), transparent 28%), linear-gradient(160deg, #07070d, #1f2038); }
+
+
+    /* ---- art: collage glossary + in-page viewer ---- */
+    .work-section { scroll-margin-top: 100px; }
+    .collage {
+      columns: 4 220px;
+      column-gap: 14px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(139, 92, 255, 0.14), transparent 18rem),
+        radial-gradient(circle at 82% 20%, rgba(255, 138, 76, 0.1), transparent 18rem),
+        rgba(244, 247, 239, 0.035);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+    }
+    .art-tile {
+      position: relative; z-index: 0; display: block; width: 100%; margin: 0 0 14px; padding: 0;
+      break-inside: avoid; -webkit-column-break-inside: avoid;
+      border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+      background: #090a12; color: var(--text); text-align: left; cursor: pointer;
+      transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease, border-color .28s ease;
+    }
+    .art-tile:hover, .art-tile:focus-visible {
+      transform: scale(1.045); z-index: 5; outline: none;
+      border-color: rgba(var(--a), .85);
+      box-shadow: 0 18px 44px rgba(0,0,0,.55), 0 0 26px rgba(var(--a), .3);
+    }
+    .art-tile img { display: block; width: 100%; height: auto; }
+    .art-tile .ph { display: block; width: 100%; position: relative; background: var(--art); }
+    .art-tile .ph::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(115deg, rgba(244,247,239,.1) 0 1px, transparent 1px 18px); }
+    .art-tile .cap {
+      position: absolute; inset: auto 0 0; padding: 30px 12px 10px;
+      font: 600 .8rem var(--f-d); letter-spacing: .03em;
+      background: linear-gradient(transparent, rgba(5,6,10,.88));
+      opacity: 0; transform: translateY(6px); transition: opacity .25s ease, transform .25s ease;
+    }
+    .art-tile:hover .cap, .art-tile:focus-visible .cap { opacity: 1; transform: none; }
+
+    .art-tile { background: linear-gradient(110deg, #0d0e18 30%, #1a1c30 50%, #0d0e18 70%) 0 0 / 220% 100%; animation: tileShimmer 1.4s linear infinite; }
+    .art-tile.ld { animation: none; background: #090a12; }
+    .art-tile img { opacity: 0; transition: opacity .35s ease; }
+    .art-tile.ld img { opacity: 1; }
+    @keyframes tileShimmer { to { background-position: -220% 0; } }
+    @media (prefers-reduced-motion: reduce) { .art-tile { animation: none; } .art-tile img { transition: none; } }
+
+    .lb { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: clamp(10px, 3vw, 40px); }
+    .lb.open { display: flex; }
+    .lb-back { position: absolute; inset: 0; background: rgba(5,5,10,.84); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); opacity: 0; transition: opacity .25s ease; }
+    .lb.show .lb-back { opacity: 1; }
+    .lb-panel {
+      position: relative; width: min(100%, 1280px); height: min(100%, 820px);
+      display: grid; grid-template-columns: minmax(0, 1fr) 340px;
+      border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+      background: rgba(12,12,22,.97); box-shadow: 0 30px 90px rgba(0,0,0,.6);
+      transform: scale(.93); opacity: 0; transition: transform .32s cubic-bezier(.2,.8,.2,1), opacity .25s ease;
+    }
+    .lb.show .lb-panel { transform: none; opacity: 1; }
+    .lb-stage {
+      position: relative; height: 100%; min-height: 0; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      touch-action: pan-y; cursor: zoom-in;
+      background:
+        linear-gradient(rgba(244,247,239,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244,247,239,.03) 1px, transparent 1px), #090a12;
+      background-size: 48px 48px;
+    }
+    .lb-stage.zoomed { cursor: grab; touch-action: none; }
+    .lb-stage.drag { cursor: grabbing; }
+    .lb-media { display: block; max-width: 100%; max-height: 100%; transform-origin: center; will-change: transform; user-select: none; -webkit-user-drag: none; }
+    img.lb-media { object-fit: contain; }
+    .lb-media.ph { position: relative; background: var(--art); }
+    .lb-btn {
+      width: 40px; height: 40px; display: grid; place-items: center; padding: 0;
+      border: 1px solid var(--line); border-radius: 50%; color: var(--text); cursor: pointer;
+      background: rgba(10,10,18,.72); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+      font: 600 1.2rem/1 var(--f-d); transition: border-color .2s, background .2s;
+    }
+    .lb-btn:hover, .lb-btn:focus-visible { border-color: rgba(var(--a), .9); background: rgba(var(--a), .25); outline: none; }
+    .lb-prev, .lb-next { position: absolute; top: 50%; translate: 0 -50%; z-index: 2; }
+    .lb-prev { left: 12px; } .lb-next { right: 12px; }
+    .lb-close { position: absolute; top: 12px; right: 12px; z-index: 3; }
+    .lb-zoom {
+      position: absolute; left: 12px; bottom: 12px; z-index: 2; display: flex; align-items: center; gap: 6px;
+      padding: 4px; border: 1px solid var(--line); border-radius: 999px; background: rgba(10,10,18,.72);
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    }
+    .lb-zoom .lb-btn { width: 34px; height: 34px; border: 0; background: transparent; font-size: 1.1rem; }
+    .lb-zoom .lb-btn:hover { background: rgba(var(--a), .25); }
+    .lb-zoom .lb-reset { width: auto; padding: 0 12px; border-radius: 999px; font: 600 .75rem var(--f-m); }
+    #lb-zl { min-width: 3.2ch; text-align: center; font: 500 .75rem var(--f-m); color: var(--muted); }
+    .lb-hint { position: absolute; right: 14px; bottom: 16px; z-index: 1; margin: 0; font: 500 .68rem var(--f-m); letter-spacing: .05em; color: rgba(236,235,245,.45); pointer-events: none; }
+    .lb-info { padding: 60px clamp(20px, 2.4vw, 30px) 28px; overflow: auto; display: flex; flex-direction: column; gap: 12px; border-left: 1px solid var(--line); }
+    .lb-kicker { margin: 0; color: var(--accent); font: 700 .74rem var(--f-m); letter-spacing: .14em; text-transform: uppercase; }
+    .lb-info h3 { margin: 0; font-size: clamp(1.4rem, 2.2vw, 1.85rem); line-height: 1.1; }
+    .lb-desc p { margin: 0 0 12px; color: #cfd0e2; }
+    .lb-tools { margin: 0; padding: 2px 0 14px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
+    .lb-tools b { display: block; margin-bottom: 2px; color: var(--text); font: 500 .7rem var(--f-m); letter-spacing: .1em; text-transform: uppercase; }
+    .lb-link { align-self: flex-start; display: inline-flex; align-items: center; min-height: 40px; padding: 0 18px; border-radius: 999px; color: #07070d; font-weight: 600; font-size: .88rem; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+    .lb-link:hover { box-shadow: 0 0 26px rgba(var(--a), .5); }
+    .lb-info [hidden], .lb-btn[hidden] { display: none !important; }
+    @media (max-width: 1000px) { .collage { columns: 3 160px; } }
+    @media (max-width: 820px) {
+      /* phone: full-screen sheet. Image on top, details underneath, the whole sheet scrolls as one page */
+      .lb { padding: 0; }
+      .lb-panel { display: block; width: 100%; height: 100%; max-height: 100dvh; border: 0; border-radius: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+      .lb-stage { height: auto; min-height: min(42dvh, 340px); max-height: 72dvh; }
+      .lb-media { flex: 0 0 auto; max-height: 72dvh; }
+      .lb-close { position: sticky; top: calc(10px + env(safe-area-inset-top, 0px)); right: auto; z-index: 6; margin: calc(10px + env(safe-area-inset-top, 0px)) 12px -50px auto; }
+      .lb-info { overflow: visible; border-left: 0; border-top: 1px solid var(--line); padding: 20px 20px calc(36px + env(safe-area-inset-bottom, 0px)); }
+      .lb-hint { display: none; }
+    }
+    @media (max-width: 560px) { .collage { columns: 2 120px; column-gap: 10px; padding: 10px; } .art-tile { margin-bottom: 10px; } }
+    @media (prefers-reduced-motion: reduce) { .art-tile, .art-tile .cap, .lb-panel, .lb-back { transition: none; } }
+
+    /* ---- case studies (PDF slide galleries) ---- */
+    .sub .study { padding: 70px 0 96px; border-top: 1px solid var(--line); scroll-margin-top: 100px; }
+    .pdf-gallery { display: grid; gap: 22px; }
+    .page-card {
+      margin-bottom: 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(139, 92, 255, 0.12), transparent 18rem),
+        radial-gradient(circle at 82% 20%, rgba(255, 138, 76, 0.08), transparent 18rem),
+        rgba(244, 247, 239, 0.035);
+      backdrop-filter: blur(18px);
+    }
+    .page-card img { width: 100%; display: block; border: 1px solid var(--line); border-radius: 8px; background: #090a12; }
+    .download-line { margin: 24px 0 0; color: #cfd0e2; font-size: clamp(1rem, 1.6vw, 1.14rem); }
+    .download-line a { color: var(--accent-2); font-weight: 800; text-decoration: underline; text-underline-offset: 4px; overflow-wrap: anywhere; }
+
+    /* ---- superhero gallery ---- */
+    .study-head { display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(260px, 0.52fr); gap: 36px; align-items: end; margin-bottom: 22px; }
+    .study-head .lead { font-size: 1.05rem; }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 16px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(139, 92, 255, 0.14), transparent 18rem),
+        radial-gradient(circle at 82% 20%, rgba(255, 138, 76, 0.1), transparent 18rem),
+        rgba(244, 247, 239, 0.035);
+      backdrop-filter: blur(18px);
+    }
+    .piece { grid-column: span 6; margin-bottom: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: rgba(5, 6, 5, 0.68); }
+    .piece.is-wide { grid-column: span 12; }
+    .piece img {
+      width: 100%;
+      height: clamp(360px, 58vw, 760px);
+      display: block;
+      object-fit: contain;
+      background:
+        linear-gradient(rgba(244, 247, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 247, 239, 0.03) 1px, transparent 1px),
+        #090a12;
+      background-size: 48px 48px;
+    }
+    .piece:not(.is-wide) img { height: clamp(300px, 38vw, 560px); }
+    figcaption {
+      padding: 14px 16px 15px;
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      border-top: 1px solid var(--line);
+      background: rgba(5, 6, 5, 0.74);
+    }
+
+    /* ---- playable games ---- */
+    button { font: inherit; }
+    .sub .games { padding: 28px 0 88px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .game-card {
+      min-height: 520px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(139, 92, 255, 0.12), transparent 16rem),
+        linear-gradient(145deg, rgba(244, 247, 239, 0.075), rgba(244, 247, 239, 0.025));
+      backdrop-filter: blur(18px);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+    }
+    .game-card h2 { margin-bottom: 0; font-size: 1.55rem; line-height: 1.05; }
+    .game-card p { margin-bottom: 0; color: var(--muted); }
+
+    .play-btn {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 999px;
+      color: #071006;
+      background: var(--text);
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .play-btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+
+    .score-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; color: #cfd0e2; font-size: 0.95rem; }
+    .arena {
+      position: relative;
+      flex: 1;
+      min-height: 280px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(rgba(244, 247, 239, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 247, 239, 0.035) 1px, transparent 1px),
+        rgba(5, 6, 5, 0.45);
+      background-size: 34px 34px;
+    }
+    .target {
+      position: absolute;
+      width: 54px;
+      height: 54px;
+      border: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle at 34% 28%, #ecebf5, var(--accent) 34%, #3a2a8c 72%);
+      box-shadow: 0 0 32px rgba(139, 92, 255, 0.55);
+      cursor: pointer;
+    }
+    .memory-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .tile {
+      aspect-ratio: 1;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: transparent;
+      background: rgba(244, 247, 239, 0.07);
+      cursor: pointer;
+      transition: transform 160ms ease, background 160ms ease, color 160ms ease;
+    }
+    .tile.revealed, .tile.matched { color: #071006; background: linear-gradient(135deg, var(--accent), var(--accent-2)); transform: translateY(-2px); }
+    .reaction-pad {
+      flex: 1;
+      min-height: 280px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: #cfd0e2;
+      background: rgba(244, 247, 239, 0.055);
+      cursor: pointer;
+      user-select: none;
+      text-align: center;
+      padding: 22px;
+      transition: background 180ms ease, color 180ms ease;
+    }
+    .reaction-pad.ready { background: rgba(255, 138, 76, 0.22); }
+    .reaction-pad.go { color: #071006; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+    .cps-pad {
+      flex: 1;
+      min-height: 280px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: #071006;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      text-align: center;
+      padding: 22px;
+      font-size: clamp(1.5rem, 4vw, 2.6rem);
+      font-weight: 900;
+    }
+    .cps-pad.idle { color: #cfd0e2; background: rgba(244, 247, 239, 0.055); }
+
+    /* ---- responsive ---- */
+    @media (max-width: 860px) {
+      .bg-fx::before { animation: none !important; }
+      .sub .section-head, .sub .grid, .study-head { grid-template-columns: 1fr; }
+      .study-head { gap: 14px; }
+      .grid-art .card.large { grid-column: auto; }
+      .piece, .piece.is-wide { grid-column: span 12; }
+    }
+    @media (max-width: 760px) { .sub .games { grid-template-columns: 1fr; } }
+    @media (max-width: 700px) {
+      .work-item, .work-item:nth-child(even) { grid-template-columns: 1fr; }
+      .work-item:nth-child(even) .work-visual { order: 0; }
+      .work-visual { min-height: 220px; }
+    }
+    @media (max-width: 640px) {
+      .sub .hero, .sub .section, .sub .study, .sub .games { width: min(calc(100% - 28px), var(--max)); }
+      .sub .hero { min-height: 58svh; padding-top: 150px; }
+      .sub .hero.is-compact { min-height: 44svh; }
+      .sub .hero.is-long { min-height: 60svh; }
+      .sub h1 { font-size: clamp(2.6rem, 14vw, 3.8rem); }
+      .sub .hero.is-long h1 { font-size: clamp(2.3rem, 11vw, 3.05rem); }
+      .page-card { padding: 9px; }
+      .pdf-gallery { gap: 14px; }
+      .gallery { padding: 10px; gap: 10px; }
+      .piece img, .piece:not(.is-wide) img { height: clamp(260px, 82vw, 520px); }
+      figcaption { padding: 12px 13px; font-size: 0.76rem; }
+    }
+  
+/* sub-view layout + type scale (overrides) */
+.sub .hero,.sub .section,.sub .study,.sub .games{width:min(calc(100% - 48px),var(--max));margin:0 auto}
+.sub .hero{position:relative;min-height:56svh;padding:150px 0 56px;display:grid;align-items:end}
+.sub .hero.is-compact{min-height:46svh;padding-bottom:40px}.sub .hero.is-long{min-height:56svh;padding-bottom:56px}
+.sub .hero>div{position:relative;z-index:1;min-width:0}
+.sub .eyebrow{margin:0 0 14px;color:var(--accent);font:500 .74rem var(--f-m);text-transform:uppercase;letter-spacing:.2em}
+.sub h1,.sub .hero.is-long h1,.sub .hero.is-compact h1{max-width:900px;margin-bottom:20px;font-size:clamp(2.4rem,5.6vw,4.6rem);line-height:1.04;overflow-wrap:break-word}
+.sub .hero.is-long h1{font-size:clamp(2.1rem,4.6vw,3.8rem)}
+.sub .intro,.sub .hero.is-long .intro,.sub .hero.is-compact .intro{max-width:68ch;color:#cfd0e2;font-size:clamp(1rem,1.3vw,1.1rem)}
+.sub .section{padding:30px 0 80px}
+.sub .section-head{display:grid;grid-template-columns:minmax(0,.85fr) minmax(260px,.7fr);gap:32px;align-items:end;margin-bottom:22px}
+.sub .section-head.overview-head,.sub .section-head.solo{grid-template-columns:1fr}.sub .section-head.overview-head{gap:10px}
+.sub h2{font-size:clamp(1.8rem,3.6vw,3rem);line-height:1.08}.sub .lead,.study-head .lead{color:var(--muted);font-size:1rem}
+.sub .card h3,.game-card h2{font-size:1.3rem}.sub .card p,.work-text p,.game-card p{font-size:.94rem}
+.work-text h3{font-size:clamp(1.2rem,2vw,1.5rem)}.sub .work-kicker{font:500 .7rem var(--f-m);letter-spacing:.16em}
+.crumb{margin-bottom:22px;font:500 .72rem var(--f-m);letter-spacing:.06em;text-transform:uppercase;border-radius:6px;background:rgba(10,10,18,.5)}
+.sub .grid,.gallery,.page-card{border-radius:14px}.sub .card,.work-item,.piece,.game-card{border-radius:12px}
+figcaption{font:500 .7rem var(--f-m)!important;letter-spacing:.14em!important}.score-row{font:500 .82rem var(--f-m)}
+.download-line{font-size:.95rem}
+@media(max-width:860px){.sub .section-head{grid-template-columns:1fr}}
+@media(max-width:640px){.sub .hero,.sub .section,.sub .study,.sub .games{width:min(calc(100% - 32px),var(--max))}.sub .hero{min-height:50svh;padding-top:150px}.sub h1,.sub .hero.is-long h1{font-size:clamp(2rem,9.5vw,2.8rem)}}
+@media(prefers-reduced-motion:reduce){[data-r]{opacity:1;translate:none}.bgv{display:none}.stage::before{animation:none}}
+</style>
+  <noscript><style>.view[hidden]{display:block!important}[data-r]{opacity:1;translate:none}</style></noscript>
+</head>
+<body data-view="home">
+  <div class="stage" aria-hidden="true">
+    <video class="bgv" data-for="home" data-src="assets/video/hero.mp4" muted loop playsinline preload="none"></video>
+    <video class="bgv" data-for="art superhero house-of-the-dragon dystopian-india" data-src="assets/video/ink.mp4" muted loop playsinline preload="none"></video>
+    <video class="bgv" data-for="game-systems game-design-documentation games" data-src="assets/video/grid.mp4" muted loop playsinline preload="none"></video>
+    <canvas id="fx"></canvas><div class="vig"></div><div class="grain"></div>
+  </div>
+  <div class="xp" aria-hidden="true"></div>
+  <header class="site-header" aria-label="Primary navigation">
+    <nav class="nav">
+      <a class="brand" href="#home" aria-label="iCreate home">
+        <span class="brand-mark">i</span>
+        <span>iCreate</span>
+      </a>
+      <div class="nav-links" aria-label="Site sections">
+        <a href="#about">About</a>
+        <a href="#works" data-for="art game-systems game-design-documentation superhero house-of-the-dragon dystopian-india">Works</a>
+        <a href="#games" data-for="games">Games</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="cta" href="#contact">Start a Project</a>
+    </nav>
+  </header>
+  <!-- Pages are <div class="view" data-view="slug"> blocks; link to them with <a href="#slug">. Background videos live in assets/video/ (hero.mp4, ink.mp4, grid.mp4) and are optional. -->
+  <main id="main">
+<div class="view" id="v-home" data-view="home" data-title="iCreate | Ivan Portfolio">
+    <section class="home-hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <h1 id="hero-title">Crafting Experiences Beyond Games</h1>
+        <p class="hero-tagline">
+          A home for everything I Create
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#works">View Works</a>
+          <a class="button" href="#about">Meet Ivan</a>
+        </div>
+      </div>
+      <span class="scroll-note">Scroll</span>
+    </section>
+
+    <section class="home-section reveal" id="about" aria-labelledby="about-title">
+      <div class="section-inner">
+        <div class="home-head">
+          <h2 id="about-title">About Me</h2>
+          <p class="home-lead">
+            A designer focused on mechanics that are easy to read, satisfying to master, and memorable long after the screen fades.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-copy">
+            <p>
+              I'm Ivan, a game developer and designer who enjoys turning ideas into interactive experiences. I build games in Unity, with a strong focus on clean architecture, thoughtful systems, and technical problem-solving, while also exploring level design, concept art, and 3D modeling. I enjoy working where creativity and technology intersect, bringing ideas to life through both design and development.
+            </p>
+            <p>
+              Beyond games, I'm passionate about storytelling through writing, worldbuilding, and music. Whether I'm sketching, playing the guitar or ukulele, or working on new stories and creative projects, I'm always exploring new ways to create meaningful experiences and grow as a multidisciplinary creator.
+            </p>
+            <div class="tags" aria-label="Interests and skills">
+              <span class="tag">Game Systems</span>
+              <span class="tag">Level Design</span>
+              <span class="tag">Asset Production</span>
+              <span class="tag">Texturing</span>
+              <span class="tag">Prototyping</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section reveal" id="works" aria-labelledby="works-title">
+      <div class="section-inner">
+        <div class="home-head">
+          <h2 id="works-title">Portfolio</h2>
+          <p class="home-lead">
+            An overview of everything I've brought to the table so far...
+          </p>
+        </div>
+
+        <div class="work-grid">
+          <a class="work-card w1" href="#art">
+            <div class="work-content">
+              <h3>Art</h3>
+              <p>Art ranging from characters to environments, comics to 3d assets, texturing to ui design</p>
+            </div>
+          </a>
+
+          <a class="work-card w2" href="#game-systems">
+            <div class="work-content">
+              <h3>Game Systems</h3>
+              <p>Simple and complex systems designed while keeping in mind player feel and feedback</p>
+            </div>
+          </a>
+
+          <a class="work-card w3" href="#game-design-documentation">
+            <div class="work-content">
+              <h3>Game Design Documentation</h3>
+              <p>A Game Design Document is a compass as it keeps every creative decision pointed toward the same destination.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section reveal" id="contact" aria-labelledby="contact-title">
+      <div class="section-inner">
+        <div class="home-head">
+          <h2 id="contact-title">Contact</h2>
+          <p class="home-lead">
+            Have a collaboration, prototype, or game idea in mind? Send a note and start the conversation.
+          </p>
+        </div>
+
+        <div class="contact-wrap">
+          <aside class="contact-card">
+            <p>
+              Available for game design projects, portfolio reviews, prototypes, and creative collaborations.
+            </p>
+            <div class="contact-links">
+              <a href="mailto:02.pereira.ivan@gmail.com">02.pereira.ivan@gmail.com</a>
+              <a href="https://www.linkedin.com/in/ivan-pereira-a14696318" target="_blank" rel="noopener" aria-label="Ivan on LinkedIn">LinkedIn</a>
+              <a href="#" aria-label="Ivan on ArtStation">ArtStation</a>
+            </div>
+          </aside>
+
+          <form id="contact-form" action="#">
+            <label>
+              Name
+              <input type="text" name="name" placeholder="Your name" autocomplete="name" />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="you@example.com" autocomplete="email" />
+            </label>
+            <label>
+              Message
+              <textarea name="message" placeholder="Tell me about the project"></textarea>
+            </label>
+            <button class="submit" type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  
+</div>
+
+<div class="view sub" id="v-art" data-view="art" data-title="Art | iCreate" hidden>
+      <section class="hero" aria-labelledby="art-title">
+        <div>
+          <a class="crumb" href="#works">&larr; Back to Portfolio</a>
+          <p class="eyebrow">Portfolio | Art</p>
+          <h1 id="art-title">Art</h1>
+          <p class="intro">Every game begins as a blank canvas. Art is what gives it a soul before code gives it life.</p>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="art-overview-title">
+        <div class="section-head overview-head">
+          <h2 id="art-overview-title">Overview</h2>
+          <p class="lead">A broader perspective of all the art ive painted my canvas with.</p>
+        </div>
+
+        <div class="grid grid-art">
+          <a class="card c1" href="#characters">
+            <h3>Characters</h3>
+            <p>Silhouettes, shape language, colour palettes, references and inspirations are all the key factors leading to a good character design.</p>
+          </a>
+          <a class="card c2" href="#environments">
+            <h3>Environments</h3>
+            <p>There's a moment when you can close your eyes and see a world of your own making — Sabrina Klein, Eighth Day Genesis</p>
+          </a>
+          <a class="card c3" href="#props-assets">
+            <h3>Props & Assets</h3>
+            <p>Every prop is more than a model. It's a piece of visual storytelling that brings environments to life.</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="section work-section" id="characters" aria-labelledby="characters-title">
+        <div class="section-head solo">
+          <h2 id="characters-title">Characters</h2>
+        </div>
+        <div class="collage" data-cat="characters" aria-label="Characters artwork"></div>
+      </section>
+
+      <section class="section work-section" id="environments" aria-labelledby="environments-title">
+        <div class="section-head solo">
+          <h2 id="environments-title">Environments</h2>
+        </div>
+        <div class="collage" data-cat="environments" aria-label="Environments artwork"></div>
+      </section>
+
+      <section class="section work-section" id="props-assets" aria-labelledby="props-assets-title">
+        <div class="section-head solo">
+          <h2 id="props-assets-title">Props &amp; Assets</h2>
+        </div>
+        <div class="collage" data-cat="props-assets" aria-label="Props and assets artwork"></div>
+      </section>
+</div>
+<div class="view sub" id="v-game-systems" data-view="game-systems" data-title="Game Systems | iCreate" hidden>
+      <section class="hero" aria-labelledby="game-systems-title">
+        <div>
+          <a class="crumb" href="#works">&larr; Back to Portfolio</a>
+          <p class="eyebrow">Portfolio | Systems Design</p>
+          <h1 id="game-systems-title">Game Systems</h1>
+          <p class="intro">Simple and complex systems designed while keeping in mind player feel, feedback, clarity, and long-term engagement.</p>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="game-systems-overview-title">
+        <div class="section-head">
+          <h2 id="game-systems-overview-title">Overview</h2>
+          <p class="lead">A focused space for documenting mechanics, progression loops, balancing ideas, economy structures, and interaction rules that shape how a player understands and feels a game.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card c1">
+            <h3>Core Loops</h3>
+            <p>Designing repeatable player actions that stay readable, satisfying, and meaningful.</p>
+          </article>
+          <article class="card c2">
+            <h3>Feedback</h3>
+            <p>Using timing, response, clarity, and reward signals to make systems feel alive.</p>
+          </article>
+          <article class="card c3">
+            <h3>Progression</h3>
+            <p>Structuring upgrades, goals, pacing, and difficulty so players always know why the next step matters.</p>
+          </article>
+        </div>
+      </section>
+    
+</div>
+<div class="view sub" id="v-game-design-documentation" data-view="game-design-documentation" data-title="Game Design Documentation | iCreate" hidden>
+      <section class="hero" aria-labelledby="game-design-documentation-title">
+        <div>
+          <a class="crumb" href="#works">&larr; Back to Portfolio</a>
+          <p class="eyebrow">Portfolio | Documentation</p>
+          <h1 id="game-design-documentation-title">Game Design Documentation</h1>
+          <p class="intro">A Game Design Document is a compass as it keeps every creative decision pointed toward the same destination.</p>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="game-design-documentation-overview-title">
+        <div class="section-head">
+          <h2 id="game-design-documentation-overview-title">Overview</h2>
+          <p class="lead">A clean documentation space for design pillars, mechanics, player goals, references, feature outlines, and production notes that keep a project coherent.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card c1">
+            <h3>Design Pillars</h3>
+            <p>The main creative principles that guide tone, systems, and player experience.</p>
+          </article>
+          <article class="card c2">
+            <h3>Feature Specs</h3>
+            <p>Clear breakdowns of mechanics, rules, UI behavior, edge cases, and implementation needs.</p>
+          </article>
+          <article class="card c3">
+            <h3>Production Notes</h3>
+            <p>References, priorities, constraints, and decisions that help the team move with shared context.</p>
+          </article>
+        </div>
+      </section>
+    
+</div>
+<div class="view sub" id="v-games" data-view="games" data-title="Human Benchmark | iCreate" hidden>
+      <section class="hero is-compact" aria-labelledby="games-title">
+        <div>
+          <a class="crumb" href="#home">&larr; Back to Home</a>
+          <p class="eyebrow">iCreate | Playable Experiments</p>
+          <h1 id="games-title">Human Benchmark</h1>
+          <p class="intro">Feeling a step behind? Here's a collection of fast-paced brain training games to sharpen your reflexes, strengthen your memory, and boost your focus</p>
+        </div>
+      </section>
+
+            <section class="games" aria-label="Playable games">
+        <article class="game-card">
+          <h2>Aim Trainer</h2>
+          <p>Click as many glowing targets as you can before the timer ends.</p>
+          <div class="score-row"><span>Score: <strong id="target-score">0</strong></span><span>Time: <strong id="target-time">20</strong>s</span></div>
+          <div class="arena" id="target-arena"></div>
+          <button class="play-btn primary" id="target-start">Start</button>
+        </article>
+
+        <article class="game-card">
+          <h2>Memory Test</h2>
+          <p>Find all matching pairs with as few moves as possible.</p>
+          <div class="score-row"><span>Moves: <strong id="memory-moves">0</strong></span><span>Pairs: <strong id="memory-pairs">0</strong>/8</span></div>
+          <div class="memory-grid" id="memory-grid"></div>
+          <button class="play-btn primary" id="memory-reset">Shuffle</button>
+        </article>
+
+        <article class="game-card">
+          <h2>Reaction Test</h2>
+          <p>Wait for green, then click as fast as possible.</p>
+          <div class="score-row"><span>Best: <strong id="reaction-best">--</strong></span><span>Last: <strong id="reaction-last">--</strong></span></div>
+          <div class="reaction-pad" id="reaction-pad">Click Start</div>
+          <button class="play-btn primary" id="reaction-start">Start</button>
+        </article>
+
+        <article class="game-card">
+          <h2>CPS Test</h2>
+          <p>Measure how fast you can click or tap in five seconds.</p>
+          <div class="score-row"><span>Clicks: <strong id="cps-clicks">0</strong></span><span>Time: <strong id="cps-time">5.0</strong>s</span><span>CPS: <strong id="cps-score">0.00</strong></span></div>
+          <div class="cps-pad idle" id="cps-pad">Start Tapping</div>
+          <button class="play-btn primary" id="cps-reset">Reset</button>
+        </article>
+      </section>
+    
+</div>
+<div class="view sub" id="v-superhero" data-view="superhero" data-title="Superhero | iCreate" hidden>
+      <section class="hero is-long" aria-labelledby="superhero-title">
+        <div>
+          <a class="crumb" href="#characters">&larr; Back to Characters</a>
+          <p class="eyebrow">Character Study 1</p>
+          <h1 id="superhero-title">Superhero</h1>
+          <p class="intro">For the superhero assignment, we were tasked with creating 10 superhero masks and the lore behind each mask. This included establishing why the superhero was needed, providing a compelling reason for them to wear a mask beyond simply concealing their identity, and defining the goals they sought to accomplish as masked superheroes.</p>
+          <p class="intro">We also had the option of creating supervillains for the assignment. As a group, we decided to build a shared universe where all 10 superheroes and supervillains could coexist. To give the characters a sense of cohesion, we developed interconnected backstories and a common world that tied each of them together as part of the same universe.</p>
+          <p class="intro">My contribution to this project was the creation of three of the ten masks, including their concepts, backstories, and roles within the shared universe.</p>
+        </div>
+      </section>
+
+      <section class="study" aria-labelledby="war-general-title">
+        <div class="study-head">
+          <h2 id="war-general-title">The War General</h2>
+          <p class="lead">Boar mask development, arranged from story foundation through final render.</p>
+        </div>
+        <div class="gallery">
+          <figure class="piece is-wide">
+            <img loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/pw/AP1GczPS-YvpgEE1AL3p_U--ViX9eyN92vJp2e7SvksYEAihICHGgxNGJOnY9sxxgga6AFUvwRnkBVPvmwcOjnswfPm9k7bRVzewqZMgNU6el4KOIYkOaRGGaTNgvV7vMgeSR10JWGcTTwEYvyjIR9ZJJAo=w1888-h1059-s-no-gm?authuser=2" alt="The War General lore sheet" />
+            <figcaption>Lore</figcaption>
+          </figure>
+          <figure class="piece">
+            <img loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/pw/AP1GczMZW-aIuozpAoSpPWteWDnz_0rnWlkmPx87haL97Hp7FYa2T3gAVTkqCh3HM0qcavwXUefWyGBr2AHY-LUADb8gRYtVLca8pIU_BxoSIm44kuh0U510jJRXnLqIwMi9BdF94Wdcy77gM448vcogmf8=w1878-h1033-s-no-gm?authuser=2" alt="The War General reference board" />
+            <figcaption>References</figcaption>
+          </figure>
+          <figure class="piece">
+            <img loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/pw/AP1GczNib7eGiuPvyF5o3f-XTJ-sXI8AuaMdPbkiNnd3u020FWzR7SXw4ZtyDkmGP-b-iEIToZN95KJXC8mcJsqKL1EVfRjYqrCmyUpH0cx-QLfKwbdP3KQWyLRoD0gcYT69B3uLcOnhOoOwJXC0ADTSFvg=w1489-h1285-s-no-gm?authuser=2" alt="The War General sketch" />
+            <figcaption>Sketch</figcaption>
+          </figure>
+          <figure class="piece">
+            <img loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/pw/AP1GczNkK0VjMrxqnbE2Tm3Ur6peOthKwk-xbhlfbV5I1UcZVDaNgmt2MjoX7tp4NUp47wctjAAjGUQtLbJkmJKu15JMYmh6XFmqIBMn7ZmTzA2VhyHduOGXgwdgiUnwhaUImOP0iCL8PQo6LVTLLZYi9mo=w1495-h1330-s-no-gm?authuser=2" alt="The War General line art" />
+            <figcaption>Line Art</figcaption>
+          </figure>
+          <figure class="piece">
+            <img loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/pw/AP1GczOpeqvSVjGARhRqzzyLwxvU1YID_7_xI3x014FzlR5c-E80qsZsKD1ZVG_Pw_xkK1pZZzjtm-wcNgx2MgA9R_T6e93ZBgNBcAoae42I5yGNSYsLM4nMy0GtT_IcDA9CuIvqWxZggja19rMyVtMXkMA=w2176-h1319-s-no-gm?authuser=2" alt="The War General final render" />
+            <figcaption>Final</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="study" aria-labelledby="animalist-title">
+        <div class="study-head">
+          <h2 id="animalist-title">The Animalist</h2>
+          <p class="lead">Animalist mask development, shown in the same production sequence.</p>
+        </div>
+        <div class="gallery">
+          <figure class="piece is-wide">
+            <img loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/pw/AP1GczPrsBBqicIYEKYBgg15A9VwnVHxCGQia3Txhihf9u7Qx-9lX_6Gw--O3bMy5GvXOVNZJKK_3VjjTtSJDdCqYFDvgBuxqYlzn1lweUsTSChE7_5tWB-sX9qvm-ILa3xZa7mXsK9wJ1gNPBApNg1D4LA=w1875-h1041-s-no-gm?authuser=2" alt="The Animalist lore sheet" />
+            <figcaption>Lore</figcaption>
+          </figure>
+          <figure class="piece">
+            <img loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/pw/AP1GczPqJN_ReRtPbd4FDvbvscPeZdVQhLK87e4uUzTnaXmeajPfXfjwliMc3hOAyUT8IsF3nU_huo9U46Ds1w17EXPvxO3Z5H6qDuYyGaZ2hZJhwrnNliMaOjlsiwMkCPqS10PUVt4ut1GUJfdHg1rsIfg=w1866-h1021-s-no-gm?authuser=2" alt="The Animalist reference board" />
+            <figcaption>References</figcaption>
+          </figure>
+          <figure class="piece">
+            <img loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/pw/AP1GczP-aL0B_xgZCDT4vZoQ1DitFvTxfu9Iv5qV9ATkghqw3DZxhZsZyeYFZwtWdHSWo86IpNaG29X5fiJMCTFwZ0TzYD2bJScDouzb1bVTsxelBYNbU8eZWvFomuAYa-OfCZA5lBMKVs7wOzQ-vCobaMk=w904-h922-s-no-gm?authuser=2" alt="The Animalist sketch" />
+            <figcaption>Sketch</figcaption>
+          </figure>
+          <figure class="piece">
+            <img loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/pw/AP1GczMPeT7uOUfx4FDgR_zslq0Fme6GDh6M7rkh-Xcuwjjwcvw9Lns2BerHjDs5Zwt6AGqTxx14M8DRErcSEl5khU9CFCF_1b7rx_wQc99GQgT5zBAaZWAXyhmcAZkj-jzgIneKHgq4nkzlfI5bWCdtwBo=w919-h1279-s-no-gm?authuser=2" alt="The Animalist line art" />
+            <figcaption>Line Art</figcaption>
+          </figure>
+          <figure class="piece">
+            <img loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/pw/AP1GczMvFTQ-K7Z7UXkY8vHwJLySSf9xkSjjNP4jouKMmErcFbUN0UaK-4BTTx45CYBu8jjSFFmnpOSDEP5h7ZqICrOt4M8b3HscEIhVVKHefPrhPsN3HCXPsJxsm8ppPrblAlQMY3268_8eN_3bJK39MdM=w1790-h1347-s-no-gm?authuser=2" alt="The Animalist final render" />
+            <figcaption>Final</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="study" aria-labelledby="bonebound-title">
+        <div class="study-head">
+          <h2 id="bonebound-title">The Bonebound</h2>
+          <p class="lead">Bonebound concept work, moving from lore to visual references to the completed render.</p>
+        </div>
+        <div class="gallery">
+          <figure class="piece is-wide">
+            <img loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/pw/AP1GczOQ116gOBgnZT-VNJWqkscLVCk6sukkCgaJ5sO0pEh4MlFSDcS5af6cTGKzSSrsVx0P8f1yock9i3pWfN8eUp4XoYrKqte2Jiau9DQFXYm1didnowVPPZMFonBDMun6Mn5bYbpsqCahdhg_Sj4aZ3w=w1872-h1027-s-no-gm?authuser=2" alt="The Bonebound lore sheet" />
+            <figcaption>Lore</figcaption>
+          </figure>
+          <figure class="piece">
+            <img loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/pw/AP1GczM6W4tBAH2uUi864yKoBq5ooM6AmvDAqx9Rn10c2xRWCD2RwXwNBMiuq9WoD1PWJvolYVQM3Z3sVIpVncxm11DuK7Q2UNx64hf_QvFia1O6PzR3fRWhWvmvil2EUMSwiQfgXCxJxF2lm8HkkJkCNTQ=w1783-h969-s-no-gm?authuser=2" alt="The Bonebound reference board" />
+            <figcaption>References</figcaption>
+          </figure>
+          <figure class="piece">
+            <img loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/pw/AP1GczNs9rg2WKeSQCNHYIg_NK7Cbx0wLciT25_YzOTYua7KvC2AYSuURqpF1whIF4Tq-7d4YFAQ_Hlhoxnm21yqciy2NO5W7K7XlvTag-WDkwSc7k9iEPx12NFPhCjmjMHhZI_UvFmNDCvh_JL5bJI6LNE=w1811-h1347-s-no-gm?authuser=2" alt="The Bonebound final render" />
+            <figcaption>Final Render</figcaption>
+          </figure>
+        </div>
+      </section>
+    
+</div>
+<div class="view sub" id="v-house-of-the-dragon" data-view="house-of-the-dragon" data-title="Indianized House of the Dragon | iCreate" hidden>
+      <section class="hero is-long" aria-labelledby="house-of-the-dragon-title">
+        <div>
+          <a class="crumb" href="#characters">&larr; Back to Characters</a>
+          <p class="eyebrow">Character Study 2</p>
+          <h1 id="house-of-the-dragon-title">Indianized House of the Dragon Concept Art</h1>
+          <p class="intro">For this assignment, we were tasked with creating concept art for two characters from a game or television series of our choice. The process began with selecting a game or series, followed by choosing two characters. We then conducted extensive reference collection for both characters, created black-and-white renders exploring a variety of poses, and experimented with different colour schemes and palettes. After selecting the strongest combination of pose and colour scheme, we produced a final rendered illustration with an optional background.</p>
+          <p class="intro">For our project, we chose House of the Dragon as the source material, with Daemon Targaryen and Caraxes as our selected characters. We reimagined them within the Gupta period of Indian history, adapting their designs to reflect the aesthetics, attire, and cultural influences of that era before following the complete concept art pipeline.</p>
+        </div>
+      </section>
+
+      <section class="study" aria-label="Indianized House of the Dragon concept art slides">
+        <div class="pdf-gallery">
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczP6syA_QybaoCGKsHJod4CYIoAugBHnisQH8wxWGPWJTKJzselc-qQcw33ID_zSRrO4-mKO8qr7DgvHWT4roAdkpn5J=w2314-h1303-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 1" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczNSdDrTI3Kw-9kB3azTwYHy04POqRQbN7O2BYJnmnTmNEiBRNicxfY=w2316-h1299-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 2" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczO2Ft_gpUxZ5ZCXfeBcAhbpbqHQCRYwK82WDsgkKxfGMsxPub1Notw=w2314-h1303-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 3" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczMw5GTkGh1zyHKM3CFXYJA2DBLA3mmKsxZJm0mZUBEEfMjRs7iyWsI=w2311-h1302-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 4" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczPHikQf-JeTnt3SgcdIfjO_k66I6B6m3n2N0R3eyyiqzj06WaV5Ll4=w2314-h1300-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 5" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczMwDV9vljHAoqljHb7l37c4CN_pC6WrfjOnlQWg8OXIFHrVpGXZMMw=w2314-h1300-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 6" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczO0rVWI-9goSP36YrHEz3UY37Sv8pz0gqNGtUJkkV1VgRp_UP8HcqF1-8el34mj__UN4c14eLa_O2SmGkC3iLm5VdUm=w2311-h1302-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 7" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczOp4rTMsWnkc_qhOHjgaQzvBEEoF30B3m33PVSQsWHjhh6wjbFjQt4=w2314-h1297-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 8" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczMiFIYcIgIgSAUYmPqKDpz_5dIBbsx0fAfxYN-3dMk-tXVDurU5uSkpt4LzhKO51ccy7QKhuxgY9SrmUujk4maffchZ=w2314-h1300-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 9" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczOZTcR8qabQdkQZUaOXmkWG4t3lzAheO3tztj6I5wU1rs-RaxPt3XU=w2314-h1299-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 10" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczOG8Oy_bCpb4iHh9UcHBe3T-muW1M_3QvqHDkt6OQ2I2eCK2GJa_zw=w2311-h1300-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 11" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczPDrrRNMCXuID2pPq5beR0WMx3nsWXiuuTDycpBVoANoCMdqN4aMtM=w2314-h1300-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 12" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczNB8ec7vYWjacBixW7mRahUrOuFgdIOq9fUpsaSXeVu0J6cH1qO0S0=w2317-h1302-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 13" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczMWHDp1eRKoMvr1XK_ztI0CJ8BcKCw1KCMMSjQot8T_H2ivnOW_eyo=w2314-h1299-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 14" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczMtVRK1KUqCVBu8MfDU02lkjNNMLL2nh6kBE2xmggE8kWMYsNAX3lM=w2317-h1302-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 15" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczOKocUldilnj0uhez0eXLxWli2fF_iWa6MiVy2xsNZd-rfHC4feHkqfZ73caXEmK4SVR3p0inlDLpan13Tiy61gQC3m=w2314-h1302-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 16" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczNG8MeDvM1uXRWB_HvduXsxKml1K0i3XqgLZbqioV7ENG-69A943I1JQzEguzUnENCuAB4-P1YBFJfSIKcadgCg16JJ=w2314-h1300-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 17" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczOfCLBpMBpDQ999yq-nvPzI_VDEQ2-b3FnbhVJg_oJ5-Fp8JddYZX8=w2314-h1299-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 18" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczM1bUWuENIthLDqsyCyO6rpizVQ881YJsxtxaH4v-AvHHXcctlm3OA=w2314-h1303-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 19" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://photos.fife.usercontent.google.com/pw/AP1GczMnvVvLS1GQdmZOjW1N2TcNmBi6Jcnto6pUD-NpxzcV26UHxinbnEE=w2311-h1303-s-no-gm?authuser=2" alt="Indianized House of the Dragon concept slide 20" loading="lazy" /></figure>
+        </div>
+        <p class="download-line">Download pdf: <a href="https://drive.google.com/file/d/12_zHlpdo9-804upVrtXVBnlGel45IN15/view?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/file/d/12_zHlpdo9-804upVrtXVBnlGel45IN15/view?usp=sharing</a></p>
+      </section>
+    
+</div>
+<div class="view sub" id="v-dystopian-india" data-view="dystopian-india" data-title="Dystopian India | iCreate" hidden>
+      <section class="hero is-long" aria-labelledby="dystopian-india-title">
+        <div>
+          <a class="crumb" href="#environments">&larr; Back to Environments</a>
+          <p class="eyebrow">Environment Study 01</p>
+          <h1 id="dystopian-india-title">Dystopian India in the Age after Kalyug</h1>
+          <p class="intro">For this assignment, we were given the creative freedom to design any environment of our choice, with the requirement that it be rooted in Indian culture. We chose to imagine India 6,700 years in the future, at the predicted end of Kalyug, and built a dystopian world around this concept.</p>
+          <p class="intro">As part of the project, I contributed by gathering visual references, exploring and curating mood boards, and helping refine the finer details of the city in the final render to enhance its depth and atmosphere.</p>
+        </div>
+      </section>
+
+      <section class="study" aria-label="Dystopian India PDF pages">
+        <div class="pdf-gallery">
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczPc2spiBxzFvzSq-3zz0wnoofRJLVUk7UjmuqxQbyZVkSnbFq0Q2V1nkrDPrQKIo4c9sCREq0tfmyGpqJwSYEUryxqdgVJzX8oxK3AXFbO-gCZvzgpP5erC9PC7DBkDShR7BTH_REmKtD6VyyngFO4=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 2" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczNCUrsTvcxdvmOzniKhzqHMTxCI4RRVJIB7DEj2nGP9_cs1uGNAf5h7qAg3ashN2M7VouIA-eRmDbfB7sISmXfIC8398D4XZQAyOYR0fDrqQP670OYpAvnkL4S1SBOGZXz3A3_LUwAVu9bYAsSW31I=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 3" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczOwSowkqk3wi-R5ercG9LIw62EAoEXL2ZRxlfpM93sqM44xPCTBdS2z9IiLqWLUvD-lVqKBq38KJ73LZPj2HYedwU9lOLZRjASdQmG0oEeK9_cjEjGxMz3iQyh-ywdh21ikxH89vKwm-8r2Kcjn1qk=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 4" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczOu5v4ofQuMsg6YutS2xiGuzv4dcsWyNr0Appr9mm6DpogKspOawhg58Zt9damUofOA44BykL7lGmErVnUZmt4KI9w-iHKbsWMIE-yam32exVW1nixgj_W8MLkltEnSFFI5kZWc50nY8oLzGhcL5No=w1891-h1063-s-no-gm?authuser=2" alt="Dystopian India concept page 5" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczN3_H4U7pDmV_fJOqQ84-eUu3OIosLebxQqGkquJJ9REHnm1s--TqEtSaIWMaiaQ8fdf-41oQqMMhmJVFuL0EuPWXyKlRGMKJg23f-PJM7J6Z7mUwp8l1A5qDFK-0s_gHrAaFSmceFBesSwCnc8yzY=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 6" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczN1pcgx_2bKcenPUdw_51KcmlKSbH3pvsjQMBwwE5Fyjl3sV06a1k3R8hiMYTwamNIsESc9oswSxVQ02jX6O0l6ZoylHSepYxnlXPfpyfi6UiFv1z4UqR6u0f1wdfjJ_HJpsm1frJgJ_vwzMWtl_JA=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 7" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczPM7Jve8Nd739LfilfauqpaF-7cj3jMTGTpIebynzK4pfiYeD2NnA0pRtFmvn4zrU482E8yYXDuaoHUUuv2r5FqmNvzcFAewnHEJ8aSf8MYcIj9YzwM5BhVCt87-wRW2-Q7rZ1C10kJklEBAzLMPgY=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 8" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczMdPuUG_vb4bg__6fKaNPkB8SyKaVvRRokca0yLcItpSd3gEiFq-QpWvrVrpccenV7cj8kK1BWqlDYXBdjmF0QcOtp0xHhlern75xU4JRPqs2f3S457v9FSJ28NTi_8ShoDJoA0VhBaI1baHvfcxlg=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 9" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczNyr3jM9BSVg1Kraci-9S4ui2dVsiGM7obbYb9BTqjdmhi54c44zV_LCjH_CfKpdAX_skIRnEPZeJY2mAgER6_zvMkFbS2Bku6bK5IBtAN-_1U6_bkd-iGAJ0H-HVTGnI7xW07BjesfWxa0siFu4d8=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 10" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczPlVfLNad51R_zqnKtA4vX9F_T44r91ucREisa5RsXZ3Do8zGB0IrRTZcJ6TdKINxKHhS2FMZeelLySPHxXPHZ4E44GR6xMUjXQ7bxQmsK0eIhgxKFogSjcF5IPNIFHuRh8EtIIeTQuX-zJP1cuPtY=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 11" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczMdY6jMmjDT3H0DsSLFpiAc5wX_xN9Ykun4K9hGUA-NDImVeRMSEtfIketF_fOg_9_vvspprB_rXWIhv1qzQgCY64IAqU7LIRRWGczxVYBrdinRLtBR0_g-7CMOESI-ROnckxG9me5IG8QKkAKbQK4=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 12" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczNGM-DSRKi12e84T1jtRTR8lYgh9qt-8ID066tTNiwGrOMNi5Ncn103pDf60VWsa0EEMNG_DMw1IAy5lnnr-HMZk24SECkalt7ueEgq0ez9tHjzcjB12lFhk9Hry3yVWMxaIeMIR2dZqnNdwf551YQ=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 13" loading="lazy" /></figure>
+          <figure class="page-card"><img src="https://lh3.googleusercontent.com/pw/AP1GczOmptrcFafNHm2SZQ_CyXWoGfyOWfphMWhtHkHZxPKPS6uzW44TtxkvMoePeXme7FIaBgfpMMC68vLvptN9RlK0-KhTR40cmkLsSo5P1cJ4oEB964JV2SIZWkT5lbEXogIC9XJTCc9pRnazBbn0Fao=w2394-h1347-s-no-gm?authuser=2" alt="Dystopian India concept page 14" loading="lazy" /></figure>
+        </div>
+        <p class="download-line">Download pdf: <a href="https://drive.google.com/file/d/1aziU-CY5iYztAnU3ts8W145P3h6sA0eh/view?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/file/d/1aziU-CY5iYztAnU3ts8W145P3h6sA0eh/view?usp=sharing</a></p>
+      </section>
+    
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>iCreate by Ivan</span>
+      <span>Game design, systems, and interactive direction.</span>
+    </div>
+  </footer>
+
+  <!-- Artwork viewer (opens in-page when a collage tile is clicked) -->
+  <div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lb-title" aria-hidden="true">
+    <div class="lb-back" data-close></div>
+    <div class="lb-panel">
+      <button type="button" class="lb-btn lb-close" id="lb-close" aria-label="Close">&times;</button>
+      <div class="lb-stage" id="lb-stage">
+        <button type="button" class="lb-btn lb-prev" id="lb-prev" aria-label="Previous artwork">&lsaquo;</button>
+        <button type="button" class="lb-btn lb-next" id="lb-next" aria-label="Next artwork">&rsaquo;</button>
+        <div class="lb-zoom" role="group" aria-label="Zoom controls">
+          <button type="button" class="lb-btn" id="lb-out" aria-label="Zoom out">&minus;</button>
+          <span id="lb-zl" aria-live="polite">100%</span>
+          <button type="button" class="lb-btn" id="lb-in" aria-label="Zoom in">+</button>
+          <button type="button" class="lb-btn lb-reset" id="lb-reset">Reset</button>
+        </div>
+        <p class="lb-hint">Scroll, pinch or double-click to zoom &middot; drag to pan</p>
+      </div>
+      <aside class="lb-info" aria-label="Artwork details">
+        <p class="lb-kicker" id="lb-kicker"></p>
+        <h3 id="lb-title"></h3>
+        <p class="lb-tools" id="lb-tools" hidden><b>Made with</b><span id="lb-tools-v"></span></p>
+        <div class="lb-desc" id="lb-desc"></div>
+        <a class="lb-link" id="lb-link" href="#" hidden>View full breakdown &rarr;</a>
+      </aside>
+    </div>
+  </div>
+  <script>
+  /* ==========================================================================
+     ART GALLERY  -  fully automatic
+     Just upload images to  assets/art  on GitHub. This page reads that folder
+     and builds the collage by itself: no editing of index.html needed.
+
+     NAME YOUR FILES  (the start of the name decides the section):
+        character-12.png        ->  Characters
+        environment-03.jpg      ->  Environments
+        prop-05.webp  /  asset-02.png   ->  Props & Assets
+     Any of .png .jpg .jpeg .webp .gif .avif works. Files are shown in number
+     order. Each image's size is read automatically when it loads.
+
+     OPTIONAL: title & description. Upload a text file with the SAME name next
+     to the image, e.g.  character-12.txt  containing:
+        Daemon Targaryen
+        Tools: Photoshop, Blender
+        Link: #house-of-the-dragon
+        (blank line)
+        Description text here. Blank lines start a new paragraph.
+     First line = title. "Tools:" and "Link:" lines are optional. No text file?
+     The title is made from the file name ("Character 12").
+
+     ART_CFG: only needed if your site is NOT on  yourname.github.io  (custom domain).
+     Then fill in your GitHub username and repository name.
+     To see a new upload instantly, add  ?fresh  to the site address once.
+     SPEED: the collage shows small copies of your images made on the fly by the free
+     wsrv.nl service (your originals stay untouched in assets/art). The big viewer
+     starts with a 1800px copy, and your full-size original loads when someone zooms.
+     Set resize:false in ART_CFG to turn this off and always load the originals.
+     ========================================================================== */
+  var ART_CFG = { owner: '', repo: '', resize: true };
+
+  /* optional hints (the page works without them): size hint stops layout jumping on a first visit */
+  var ART_DETAILS = {
+    'character-01': { ratio: '16/9' },
+    'character-02': { ratio: '1/1' }, 'character-03': { ratio: '1/1' }, 'character-04': { ratio: '1/1' },
+    'character-05': { ratio: '1/1' }, 'character-06': { ratio: '1/1' },
+    'character-07': { ratio: '3452/4557' },
+    'character-08': { ratio: '3532/4961' }, 'character-09': { ratio: '3532/4961' },
+    'character-10': { ratio: '3532/4961' }, 'character-11': { ratio: '3532/4961' }
+  };
+
+  var ART_WORKS = { 'characters': [], 'environments': [], 'props-assets': [] };
+  var ART_LABEL = { 'characters': 'Characters', 'environments': 'Environments', 'props-assets': 'Props & Assets' };
+
+  (function () {
+    'use strict';
+    var DIR = 'assets/art/', TINTS = ['a1', 'a2', 'a3', 'a4'], IMG_RE = /\.(png|jpe?g|webp|gif|avif)$/i;
+    /* ---- fast copies: the original is resized by wsrv.nl, with the original as a fallback ---- */
+    function absUrl(file) { return new URL(DIR + encodeURIComponent(file), location.href).href; }
+    var CAN_RESIZE = ART_CFG.resize !== false && /^https?:$/.test(location.protocol) && !/^(localhost|127\.|10\.|192\.168\.)/.test(location.hostname);
+    function small(file, w, q) { return 'https://wsrv.nl/?url=' + encodeURIComponent(absUrl(file)) + '&w=' + w + '&output=webp&q=' + q + '&we&maxage=31d'; }
+    function listFor(file, w, q) { return CAN_RESIZE ? [small(file, w, q), absUrl(file)] : [absUrl(file)]; }
+    function chain(img, urls, done) {            /* try each url in turn */
+      var k = 0;
+      img.onerror = function () { k++; if (k < urls.length) img.src = urls[k]; else done && done(false); };
+      img.onload = function () { done && done(true); };
+      img.src = urls[0];
+    }
+    var PREFIX = { 'characters': ['character'], 'environments': ['environment', 'env'], 'props-assets': ['prop', 'asset'] };
+
+    function store(k, v) {
+      try { if (v === undefined) return JSON.parse(localStorage.getItem(k) || 'null'); localStorage.setItem(k, JSON.stringify(v)); } catch (e) {}
+      return null;
+    }
+    var ratios = store('artRatios') || {}, saveT = 0;
+    function saveRatios() { clearTimeout(saveT); saveT = setTimeout(function () { store('artRatios', ratios); }, 600); }
+    function niceTitle(base) { return base.replace(/[-_]+/g, ' ').replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); }); }
+    function catOf(base) {
+      var l = base.toLowerCase();
+      for (var c in PREFIX) for (var i = 0; i < PREFIX[c].length; i++) if (l.indexOf(PREFIX[c][i]) === 0) return c;
+      return '';
+    }
+    function mk(base, file, txt, known) {
+      var d = ART_DETAILS[base] || {};
+      return { base: base, file: file, txt: txt || '', txtKnown: !!known, title: d.title || niceTitle(base),
+               desc: d.desc || '', tools: d.tools || '', link: d.link || '', ratio: ratios[file] || d.ratio || '' };
+    }
+
+    /* ---- 1. find what is in assets/art (GitHub folder listing) ---- */
+    function repoInfo() {
+      if (ART_CFG.owner && ART_CFG.repo) return ART_CFG;
+      var h = location.hostname; if (!/\.github\.io$/i.test(h)) return null;
+      var seg = location.pathname.split('/')[1];
+      return { owner: h.split('.')[0], repo: (seg && seg.indexOf('.') < 0) ? seg : h };
+    }
+    function listViaApi() {
+      var r = repoInfo(); if (!r) return Promise.reject(new Error('not on github.io'));
+      var key = r.owner + '/' + r.repo, c = store('artList');
+      if (!/[?&]fresh\b/.test(location.search) && c && c.k === key && Date.now() - c.t < 120000) return Promise.resolve(c.files);
+      return fetch('https://api.github.com/repos/' + key + '/contents/' + DIR.replace(/\/$/, ''))
+        .then(function (res) { if (!res.ok) throw new Error('GitHub API ' + res.status); return res.json(); })
+        .then(function (list) {
+          if (!Array.isArray(list)) throw new Error('unexpected reply');
+          var files = list.filter(function (f) { return f.type === 'file'; }).map(function (f) { return { name: f.name, size: f.size }; });
+          store('artList', { t: Date.now(), k: key, files: files }); return files;
+        });
+    }
+    function fromFiles(files) {
+      var map = {}, out = { 'characters': [], 'environments': [], 'props-assets': [] };
+      files.forEach(function (f) {
+        var n = f.name, e;
+        if (/\.txt$/i.test(n)) { var tb = n.replace(/\.txt$/i, ''); (map[tb] = map[tb] || {}).txt = n; return; }
+        if (!IMG_RE.test(n)) return;
+        var base = n.replace(IMG_RE, ''); if (/-thumb$/i.test(base)) return;     /* ignore leftovers from the old thumbnail script */
+        e = map[base] = map[base] || {};
+        if (!e.img || f.size < e.size) { e.img = n; e.size = f.size; }           /* two files, same name: use the lighter one */
+      });
+      Object.keys(map).sort(function (a, b) { return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }); }).forEach(function (base) {
+        var e = map[base]; if (!e.img) return;
+        var cat = catOf(base);
+        if (!cat) { console.info('Art file skipped, its name must start with character, environment or prop:', e.img); return; }
+        out[cat].push(mk(base, e.img, e.txt, !!e.txt));
+      });
+      return out;
+    }
+    /* backup plan if GitHub's listing can't be used (custom domain, rate limit): look for character-01, -02, ... */
+    function probe() {
+      var out = { 'characters': [], 'environments': [], 'props-assets': [] }, ex = ['png', 'jpg', 'jpeg', 'webp'];
+      function ok(u) { return fetch(u, { method: 'HEAD' }).then(function (r) { return r.ok; }).catch(function () { return false; }); }
+      function find(base) {
+        return Promise.all(ex.map(function (e) { return ok(DIR + base + '.' + e).then(function (g) { return g ? base + '.' + e : null; }); }))
+          .then(function (r) { return r.filter(Boolean)[0] || null; });
+      }
+      function run(cat) {
+        var miss = 0, n = 1, pre = PREFIX[cat][0];
+        function step() {
+          if (miss >= 3 || n > 300) return Promise.resolve();
+          var base = pre + '-' + (n < 10 ? '0' : '') + n; n++;
+          return find(base).then(function (f) { if (f) { miss = 0; out[cat].push(mk(base, f, base + '.txt', false)); } else miss++; return step(); });
+        }
+        return step();
+      }
+      return Promise.all(Object.keys(PREFIX).map(run)).then(function () { return out; });
+    }
+    function total(d) { return d['characters'].length + d['environments'].length + d['props-assets'].length; }
+
+    /* ---- 2. optional text file with title / description ---- */
+    function parseInfo(t) {
+      var title = '', tools = '', link = '', rest = [];
+      t.replace(/\r/g, '').split('\n').forEach(function (l) {
+        var m;
+        if (!title && l.trim()) title = l.trim();
+        else if ((m = l.match(/^\s*tools?\s*:\s*(.+)$/i))) tools = m[1].trim();
+        else if ((m = l.match(/^\s*link\s*:\s*(.+)$/i))) link = m[1].trim();
+        else rest.push(l);
+      });
+      return { title: title, tools: tools, link: link, desc: rest.join('\n').trim() };
+    }
+    function loadInfo(w) {
+      if (!w.txt) return Promise.resolve();
+      if (w._infoP) return w._infoP;
+      w._infoP = fetch(DIR + encodeURIComponent(w.txt)).then(function (r) { if (!r.ok) throw 0; return r.text(); }).then(function (t) {
+        var i = parseInfo(t);
+        if (i.title) w.title = i.title; if (i.desc) w.desc = i.desc; if (i.tools) w.tools = i.tools; if (i.link) w.link = i.link;
+        if (w._cap) w._cap.textContent = w.title;
+        if (w._tile) w._tile.setAttribute('aria-label', 'View ' + w.title);
+      }).catch(function () {});
+      return w._infoP;
+    }
+
+    /* ---- 3. build the collages ---- */
+    function tile(cat, w, i) {
+      var b = document.createElement('button'), m;
+      b.type = 'button'; b.className = 'art-tile'; b.setAttribute('aria-label', 'View ' + w.title);
+      if (w.file) {
+        m = new Image(); m.alt = w.title; m.decoding = 'async'; m.loading = 'lazy';
+        m.style.aspectRatio = w.ratio || '3/4';
+        b.appendChild(m);
+        chain(m, listFor(w.file, 640, 75), function (ok) {
+          if (ok) {                                         /* read the real size straight from the image */
+            w.ratio = m.naturalWidth + '/' + m.naturalHeight;
+            ratios[w.file] = w.ratio; saveRatios(); m.style.aspectRatio = ''; b.classList.add('ld');
+          } else { console.warn('Art image could not be loaded:', DIR + w.file); w._gone = true; b.remove(); }
+        });
+      } else {
+        m = document.createElement('span'); m.className = 'ph ' + (w.ph || TINTS[i % 4]);
+        m.style.aspectRatio = w.ratio || '3/4'; b.appendChild(m); b.classList.add('ld');
+      }
+      var cap = document.createElement('span'); cap.className = 'cap'; cap.textContent = w.title; b.appendChild(cap);
+      w._tile = b; w._cap = cap;
+      var hot = false;                                      /* start fetching the viewer copy as soon as someone shows interest */
+      function heat() { if (!hot && w.file && CAN_RESIZE) { hot = true; new Image().src = small(w.file, 1800, 82); } }
+      b.addEventListener('pointerenter', heat); b.addEventListener('focus', heat); b.addEventListener('touchstart', heat, { passive: true });
+      b.addEventListener('click', function () { openLb(cat, i, b); });
+      return b;
+    }
+    function build(data) {
+      var RAT = ['3/4', '1/1', '4/5', '2/3', '4/3', '3/4', '1/1', '2/3'];
+      Object.keys(ART_WORKS).forEach(function (cat, c) {
+        var box = document.querySelector('.collage[data-cat="' + cat + '"]'); if (!box) return;
+        box.textContent = '';
+        var list = data[cat] || [];
+        if (!list.length) for (var k = 0; k < 8; k++) list.push({ ph: TINTS[(k + c) % 4], ratio: RAT[(k + c * 3) % RAT.length], title: 'Coming soon', desc: 'New artwork is on the way.' });
+        ART_WORKS[cat] = list;
+        list.forEach(function (w, i) { box.appendChild(tile(cat, w, i)); if (w.txtKnown) loadInfo(w); });
+      });
+    }
+    /* grey shimmer tiles while the folder is being read */
+    document.querySelectorAll('.collage[data-cat]').forEach(function (box) {
+      ['3/4', '1/1', '4/5', '3/4', '2/3', '1/1'].forEach(function (r) {
+        var d = document.createElement('div'); d.className = 'art-tile'; d.style.aspectRatio = r; d.style.pointerEvents = 'none'; d.setAttribute('aria-hidden', 'true'); box.appendChild(d);
+      });
+    });
+    listViaApi().then(fromFiles)
+      .then(function (d) { return total(d) ? d : probe(); })
+      .catch(function (e) { console.info('GitHub folder listing not used (' + (e && e.message) + '), checking file names instead.'); return probe(); })
+      .then(build);
+
+    /* ---- viewer ---- */
+    var lb = document.getElementById('lb'), stage = document.getElementById('lb-stage'),
+        kick = document.getElementById('lb-kicker'), ttl = document.getElementById('lb-title'),
+        desc = document.getElementById('lb-desc'), tools = document.getElementById('lb-tools'),
+        toolsV = document.getElementById('lb-tools-v'), link = document.getElementById('lb-link'),
+        prev = document.getElementById('lb-prev'), next = document.getElementById('lb-next'),
+        zl = document.getElementById('lb-zl'), closeBtn = document.getElementById('lb-close');
+    var lbPanel = lb.querySelector('.lb-panel'), upgraded = false, token = 0, cur = null, media = null, opener = null, hideT = 0, z = { s: 1, x: 0, y: 0 }, MAX = 5;
+
+    function clampPan() {
+      if (!media) return;
+      var lx = Math.max(0, (media.offsetWidth * z.s - stage.clientWidth) / 2),
+          ly = Math.max(0, (media.offsetHeight * z.s - stage.clientHeight) / 2);
+      z.x = Math.max(-lx, Math.min(lx, z.x)); z.y = Math.max(-ly, Math.min(ly, z.y));
+    }
+    function paint() {
+      if (!media) return; clampPan();
+      media.style.transform = 'translate(' + z.x + 'px,' + z.y + 'px) scale(' + z.s + ')';
+      stage.classList.toggle('zoomed', z.s > 1);
+      zl.textContent = Math.round(z.s * 100) + '%';
+    }
+    function upgrade() {                                  /* first zoom: swap in the full-size original */
+      if (upgraded || !cur) return; upgraded = true;
+      var w = ART_WORKS[cur.cat][cur.i], mine = token, hi = new Image();
+      if (!w || !w.file) return;
+      hi.onload = function () { if (mine === token && media && media.tagName === 'IMG') media.src = hi.src; };
+      hi.src = absUrl(w.file);
+    }
+    function zoomAt(ns, px, py) {
+      ns = Math.max(1, Math.min(MAX, ns));
+      if (ns > 1) upgrade();
+      var k = ns / z.s; z.x = px - (px - z.x) * k; z.y = py - (py - z.y) * k; z.s = ns;
+      if (ns === 1) { z.x = 0; z.y = 0; }
+      paint();
+    }
+    function rel(cx, cy) { var r = stage.getBoundingClientRect(); return [cx - r.left - r.width / 2, cy - r.top - r.height / 2]; }
+    function fitPh() {
+      if (!media || !media.classList.contains('ph')) return;
+      var p = media.dataset.ratio.split('/'), r = (+p[0]) / (+p[1]), sw = stage.clientWidth, sh = stage.clientHeight;
+      var w = Math.min(sw, sh * r); media.style.width = w + 'px'; media.style.height = (w / r) + 'px';
+    }
+
+    function renderInfo(w) {
+      kick.textContent = ART_LABEL[cur.cat];
+      ttl.textContent = w.title || '';
+      desc.textContent = '';
+      String(w.desc || '').split(/\n\s*\n/).forEach(function (t) {
+        if (!t.trim()) return; var p = document.createElement('p'); p.textContent = t.trim(); desc.appendChild(p);
+      });
+      tools.hidden = !w.tools; toolsV.textContent = w.tools || '';
+      var ok = w.link && /^(#|https?:\/\/)/i.test(w.link);
+      link.hidden = !ok;
+      if (ok) { link.href = w.link; if (w.link.charAt(0) === '#') { link.removeAttribute('target'); link.removeAttribute('rel'); } else { link.target = '_blank'; link.rel = 'noopener'; } }
+    }
+    function fill() {
+      var w = ART_WORKS[cur.cat][cur.i], mine = ++token;
+      lbPanel.scrollTop = 0; renderInfo(w);
+      loadInfo(w).then(function () { if (cur && ART_WORKS[cur.cat][cur.i] === w) renderInfo(w); });
+      if (media) media.remove();
+      if (w.file) {
+        media = new Image(); media.alt = w.title || ''; media.draggable = false;
+        upgraded = !CAN_RESIZE;                                           /* with no resizing the original is already what's shown */
+        chain(media, listFor(w.file, 1800, 82), function (ok) { if (!ok && mine === token) { w._gone = true; step(lastDir); } });
+      }
+      else { media = document.createElement('div'); media.className = 'ph ' + (w.ph || 'a1'); media.dataset.ratio = w.ratio || '3/4'; }
+      media.classList.add('lb-media');
+      stage.insertBefore(media, stage.firstChild);
+      z = { s: 1, x: 0, y: 0 }; paint(); fitPh();
+      var many = ART_WORKS[cur.cat].filter(function (x) { return !x._gone; }).length > 1; prev.hidden = next.hidden = !many;
+    }
+    function openLb(cat, i, trigger) {
+      clearTimeout(hideT); cur = { cat: cat, i: i }; opener = trigger || null; fill();
+      lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
+      document.documentElement.style.overflow = 'hidden';
+      requestAnimationFrame(function () { requestAnimationFrame(function () { lb.classList.add('show'); fitPh(); }); });
+      closeBtn.focus({ preventScroll: true });
+    }
+    function closeLb() {
+      if (!lb.classList.contains('open')) return;
+      lb.classList.remove('show'); lb.setAttribute('aria-hidden', 'true');
+      document.documentElement.style.overflow = '';
+      hideT = setTimeout(function () { lb.classList.remove('open'); }, 280);
+      if (opener && opener.isConnected) opener.focus({ preventScroll: true });
+    }
+    var lastDir = 1;
+    function step(d) {
+      var list = ART_WORKS[cur.cat], n = list.length, k = 0; lastDir = d;
+      do { cur.i = (cur.i + d + n) % n; k++; } while (list[cur.i]._gone && k <= n);
+      if (list[cur.i]._gone) { closeLb(); return; }
+      fill();
+    }
+
+    closeBtn.addEventListener('click', closeLb);
+    lb.querySelector('[data-close]').addEventListener('click', closeLb);
+    prev.addEventListener('click', function () { step(-1); });
+    next.addEventListener('click', function () { step(1); });
+    link.addEventListener('click', function () { opener = null; closeLb(); });
+    document.getElementById('lb-in').addEventListener('click', function () { zoomAt(z.s * 1.4, 0, 0); });
+    document.getElementById('lb-out').addEventListener('click', function () { zoomAt(z.s / 1.4, 0, 0); });
+    document.getElementById('lb-reset').addEventListener('click', function () { zoomAt(1, 0, 0); });
+    window.addEventListener('hashchange', closeLb);
+    window.addEventListener('resize', function () { if (lb.classList.contains('open')) { fitPh(); paint(); } });
+
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLb();
+      else if (e.key === 'ArrowLeft') step(-1);
+      else if (e.key === 'ArrowRight') step(1);
+      else if (e.key === '+' || e.key === '=') zoomAt(z.s * 1.4, 0, 0);
+      else if (e.key === '-') zoomAt(z.s / 1.4, 0, 0);
+      else if (e.key === '0') zoomAt(1, 0, 0);
+      else if (e.key === 'Tab') {
+        var f = [].slice.call(lb.querySelectorAll('button:not([hidden]),a[href]:not([hidden])')).filter(function (n) { return n.offsetParent !== null; });
+        if (!f.length) return;
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+
+    /* wheel / double-click / drag / pinch zoom */
+    stage.addEventListener('wheel', function (e) {
+      e.preventDefault(); var p = rel(e.clientX, e.clientY); zoomAt(z.s * Math.exp(-e.deltaY * 0.0015), p[0], p[1]);
+    }, { passive: false });
+    stage.addEventListener('dblclick', function (e) {
+      if (e.target.closest('.lb-btn,.lb-zoom')) return;
+      var p = rel(e.clientX, e.clientY); zoomAt(z.s > 1 ? 1 : 2.5, p[0], p[1]);
+    });
+    var ptrs = {}, pinch = 0, sw = null, multi = false;
+    function pdist() { var k = Object.keys(ptrs); return Math.hypot(ptrs[k[0]].x - ptrs[k[1]].x, ptrs[k[0]].y - ptrs[k[1]].y); }
+    stage.addEventListener('pointerdown', function (e) {
+      if (e.target.closest('.lb-btn,.lb-zoom')) return;
+      try { stage.setPointerCapture(e.pointerId); } catch (x) {}
+      if (!Object.keys(ptrs).length) { sw = { x: e.clientX, y: e.clientY }; multi = false; }
+      ptrs[e.pointerId] = { x: e.clientX, y: e.clientY };
+      if (Object.keys(ptrs).length === 2) { pinch = pdist(); multi = true; }
+    });
+    stage.addEventListener('pointermove', function (e) {
+      var o = ptrs[e.pointerId]; if (!o) return;
+      var n = { x: e.clientX, y: e.clientY }, keys = Object.keys(ptrs);
+      if (keys.length === 2) {
+        ptrs[e.pointerId] = n; var d = pdist();
+        if (pinch) { var mx = (ptrs[keys[0]].x + ptrs[keys[1]].x) / 2, my = (ptrs[keys[0]].y + ptrs[keys[1]].y) / 2, p = rel(mx, my); zoomAt(z.s * d / pinch, p[0], p[1]); }
+        pinch = d;
+      } else if (z.s > 1) {
+        z.x += n.x - o.x; z.y += n.y - o.y; ptrs[e.pointerId] = n; stage.classList.add('drag'); paint();
+      }
+    });
+    function endPtr(e) { delete ptrs[e.pointerId]; pinch = 0; stage.classList.remove('drag'); }
+    stage.addEventListener('pointerup', function (e) {
+      var was = sw; endPtr(e); sw = null;
+      if (was && !multi && z.s === 1 && e.pointerType !== 'mouse') {          /* swipe to go to the next / previous piece */
+        var dx = e.clientX - was.x, dy = e.clientY - was.y;
+        if (Math.abs(dx) > 60 && Math.abs(dx) > 2 * Math.abs(dy)) step(dx < 0 ? 1 : -1);
+      }
+    });
+    stage.addEventListener('pointercancel', function (e) { endPtr(e); sw = null; });
+  })();
+  </script>
+  <script>
+  (function () {
+    'use strict';
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+    var views = Array.prototype.slice.call(document.querySelectorAll('.view'));
+    var slugs = {};
+    views.forEach(function (v) { slugs[v.dataset.view] = v; });
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[data-for]'));
+    var current = null;
+
+    function resolve(hash) {
+      var id = '';
+      try { id = decodeURIComponent(hash.replace(/^#\/?/, '')); } catch (e) {}
+      if (!id || id === 'top') return { view: 'home' };
+      if (slugs[id]) return { view: id };
+      var el = document.getElementById(id);
+      var host = el && el.closest('.view');
+      return host ? { view: host.dataset.view, target: el } : { view: 'home' };
+    }
+
+    function show() {
+      var r = resolve(location.hash);
+      var changed = r.view !== current;
+
+      if (changed) {
+        views.forEach(function (v) { v.hidden = v.dataset.view !== r.view; });
+        current = r.view;
+        document.body.setAttribute('data-view', r.view);
+        document.title = slugs[r.view].dataset.title || 'iCreate | Ivan Portfolio';
+        navLinks.forEach(function (a) {
+          var on = a.dataset.for.split(' ').indexOf(r.view) !== -1;
+          a.classList.toggle('is-active', on);
+          if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+        });
+        window.dispatchEvent(new CustomEvent('viewchange', { detail: r.view }));
+      }
+
+      if (r.target) {
+        // wait one frame so a freshly-shown view has layout before we scroll to it
+        requestAnimationFrame(function () {
+          r.target.scrollIntoView({ behavior: changed ? 'instant' : 'smooth', block: 'start' });
+        });
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }
+    }
+
+    window.addEventListener('hashchange', show);
+
+    // clicking a link to the hash you're already on doesn't fire hashchange, so handle it
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var h = a.getAttribute('href');
+      if (h === '#') { e.preventDefault(); return; }      // placeholder links (e.g. ArtStation)
+      if (h === location.hash) { e.preventDefault(); show(); }
+    });
+
+    show();
+
+    // contact form: static hosting can't receive POSTs, so hand off to the visitor's mail app
+    var form = document.getElementById('contact-form');
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var d = new FormData(form);
+        var name = d.get('name') || '', email = d.get('email') || '', msg = d.get('message') || '';
+        var subject = encodeURIComponent('Portfolio enquiry' + (name ? ' from ' + name : ''));
+        var body = encodeURIComponent(msg + '\n\n' + name + (email ? ' (' + email + ')' : ''));
+        location.href = 'mailto:02.pereira.ivan@gmail.com?subject=' + subject + '&body=' + body;
+      });
+    }
+  })();
+  </script>
+  <script>
+(function () {
+const arena = document.getElementById('target-arena');
+    const targetScore = document.getElementById('target-score');
+    const targetTime = document.getElementById('target-time');
+    const targetStart = document.getElementById('target-start');
+    let targetTimer = null;
+    let targetGame = { score: 0, time: 20, active: false };
+
+    function placeTarget() {
+      arena.innerHTML = '';
+      if (!targetGame.active) return;
+      const target = document.createElement('button');
+      target.className = 'target';
+      target.setAttribute('aria-label', 'Click target');
+      const bounds = arena.getBoundingClientRect();
+      const x = Math.max(0, Math.random() * (bounds.width - 54));
+      const y = Math.max(0, Math.random() * (bounds.height - 54));
+      target.style.left = x + 'px';
+      target.style.top = y + 'px';
+      target.addEventListener('click', () => {
+        targetGame.score += 1;
+        targetScore.textContent = targetGame.score;
+        placeTarget();
+      });
+      arena.appendChild(target);
+    }
+
+    targetStart.addEventListener('click', () => {
+      clearInterval(targetTimer);
+      targetGame = { score: 0, time: 20, active: true };
+      targetScore.textContent = '0';
+      targetTime.textContent = '20';
+      placeTarget();
+      targetTimer = setInterval(() => {
+        targetGame.time -= 1;
+        targetTime.textContent = targetGame.time;
+        if (targetGame.time <= 0) {
+          targetGame.active = false;
+          clearInterval(targetTimer);
+          arena.innerHTML = '<div style="display:grid;place-items:center;height:100%;color:#d8ded2;">Final score: ' + targetGame.score + '</div>';
+        }
+      }, 1000);
+    });
+
+    const memoryGrid = document.getElementById('memory-grid');
+    const memoryMoves = document.getElementById('memory-moves');
+    const memoryPairs = document.getElementById('memory-pairs');
+    const memoryReset = document.getElementById('memory-reset');
+    const symbols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+    let firstTile = null;
+    let lockMemory = false;
+    let moves = 0;
+    let pairs = 0;
+
+    function buildMemory() {
+      memoryGrid.innerHTML = '';
+      firstTile = null;
+      lockMemory = false;
+      moves = 0;
+      pairs = 0;
+      memoryMoves.textContent = '0';
+      memoryPairs.textContent = '0';
+      const deck = [...symbols, ...symbols].sort(() => Math.random() - 0.5);
+      deck.forEach((symbol) => {
+        const tile = document.createElement('button');
+        tile.className = 'tile';
+        tile.textContent = symbol;
+        tile.addEventListener('click', () => revealTile(tile, symbol));
+        memoryGrid.appendChild(tile);
+      });
+    }
+
+    function revealTile(tile, symbol) {
+      if (lockMemory || tile.classList.contains('revealed') || tile.classList.contains('matched')) return;
+      tile.classList.add('revealed');
+      if (!firstTile) {
+        firstTile = { tile, symbol };
+        return;
+      }
+      moves += 1;
+      memoryMoves.textContent = moves;
+      if (firstTile.symbol === symbol) {
+        firstTile.tile.classList.add('matched');
+        tile.classList.add('matched');
+        firstTile = null;
+        pairs += 1;
+        memoryPairs.textContent = pairs;
+        return;
+      }
+      lockMemory = true;
+      setTimeout(() => {
+        firstTile.tile.classList.remove('revealed');
+        tile.classList.remove('revealed');
+        firstTile = null;
+        lockMemory = false;
+      }, 650);
+    }
+
+    memoryReset.addEventListener('click', buildMemory);
+    buildMemory();
+
+    const reactionPad = document.getElementById('reaction-pad');
+    const reactionStart = document.getElementById('reaction-start');
+    const reactionBest = document.getElementById('reaction-best');
+    const reactionLast = document.getElementById('reaction-last');
+    let reactionState = 'idle';
+    let reactionTimeout = null;
+    let goTime = 0;
+    let bestTime = Infinity;
+
+    reactionStart.addEventListener('click', () => {
+      clearTimeout(reactionTimeout);
+      reactionState = 'waiting';
+      reactionPad.className = 'reaction-pad ready';
+      reactionPad.textContent = 'Wait for green...';
+      reactionTimeout = setTimeout(() => {
+        reactionState = 'go';
+        goTime = performance.now();
+        reactionPad.className = 'reaction-pad go';
+        reactionPad.textContent = 'Click now';
+      }, 900 + Math.random() * 2200);
+    });
+
+    reactionPad.addEventListener('click', () => {
+      if (reactionState === 'waiting') {
+        clearTimeout(reactionTimeout);
+        reactionState = 'idle';
+        reactionPad.className = 'reaction-pad';
+        reactionPad.textContent = 'Too early. Press Start again.';
+        return;
+      }
+      if (reactionState === 'go') {
+        const elapsed = Math.round(performance.now() - goTime);
+        bestTime = Math.min(bestTime, elapsed);
+        reactionLast.textContent = elapsed + 'ms';
+        reactionBest.textContent = bestTime + 'ms';
+        reactionState = 'idle';
+        reactionPad.className = 'reaction-pad';
+        reactionPad.textContent = 'Nice. Press Start to retry.';
+      }
+    });
+
+    const cpsPad = document.getElementById('cps-pad');
+    const cpsReset = document.getElementById('cps-reset');
+    const cpsClicks = document.getElementById('cps-clicks');
+    const cpsTime = document.getElementById('cps-time');
+    const cpsScore = document.getElementById('cps-score');
+    let cpsActive = false;
+    let cpsDone = false;
+    let cpsStart = 0;
+    let cpsCount = 0;
+    let cpsFrame = null;
+
+    function resetCps() {
+      cancelAnimationFrame(cpsFrame);
+      cpsActive = false;
+      cpsDone = false;
+      cpsStart = 0;
+      cpsCount = 0;
+      cpsClicks.textContent = '0';
+      cpsTime.textContent = '5.0';
+      cpsScore.textContent = '0.00';
+      cpsPad.className = 'cps-pad idle';
+      cpsPad.textContent = 'Start Tapping';
+    }
+
+    function updateCps() {
+      const elapsed = (performance.now() - cpsStart) / 1000;
+      const remaining = Math.max(0, 5 - elapsed);
+      cpsTime.textContent = remaining.toFixed(1);
+      cpsScore.textContent = (cpsCount / Math.max(elapsed, 0.01)).toFixed(2);
+      if (remaining <= 0) {
+        cpsActive = false;
+        cpsDone = true;
+        cpsPad.className = 'cps-pad idle';
+        cpsPad.textContent = 'Final: ' + cpsScore.textContent + ' CPS';
+        return;
+      }
+      cpsFrame = requestAnimationFrame(updateCps);
+    }
+
+    cpsPad.addEventListener('pointerdown', (event) => {
+      event.preventDefault();
+      if (cpsDone) return;
+      if (!cpsActive) {
+        cpsActive = true;
+        cpsStart = performance.now();
+        cpsPad.className = 'cps-pad';
+        cpsFrame = requestAnimationFrame(updateCps);
+      }
+      cpsCount += 1;
+      cpsClicks.textContent = cpsCount;
+      cpsPad.textContent = cpsCount + ' clicks';
+    });
+
+    cpsReset.addEventListener('click', resetCps);
+
+    // leaving the Games view stops any running round so timers don't keep ticking in the background
+    window.addEventListener('viewchange', function (e) {
+      if (e.detail === 'games') return;
+      clearInterval(targetTimer);
+      targetGame.active = false;
+      arena.innerHTML = '';
+      clearTimeout(reactionTimeout);
+      reactionState = 'idle';
+      reactionPad.className = 'reaction-pad';
+      reactionPad.textContent = 'Click Start';
+      resetCps();
+    });
+})();</script>
+  <script>
+(function(){
+var B=document.body,rm=matchMedia('(prefers-reduced-motion:reduce)').matches,fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+var vids=[].slice.call(document.querySelectorAll('.bgv')),c=document.getElementById('fx'),x=c.getContext('2d'),W,H,P=[],A='139,92,255',Bc='61,232,255',m={x:-999,y:-999},dpr=Math.min(devicePixelRatio||1,2);
+function theme(){var s=getComputedStyle(B);A=s.getPropertyValue('--a').trim();Bc=s.getPropertyValue('--b').trim()}
+function size(){W=c.width=innerWidth*dpr;H=c.height=innerHeight*dpr;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';P=[];for(var i=0,n=Math.min(70,Math.round(innerWidth*innerHeight/26000));i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3*dpr,vy:(Math.random()-.5)*.3*dpr,r:(Math.random()*1.4+.5)*dpr})}
+function draw(){x.clearRect(0,0,W,H);var D=150*dpr,i,j,p,q,d;for(i=0;i<P.length;i++){p=P[i];if(!rm){p.x=(p.x+p.vx+W)%W;p.y=(p.y+p.vy+H)%H}
+x.fillStyle='rgba('+A+',.75)';x.beginPath();x.arc(p.x,p.y,p.r,0,6.3);x.fill();
+for(j=i+1;j<P.length;j++){q=P[j];d=Math.hypot(p.x-q.x,p.y-q.y);if(d<D){x.strokeStyle='rgba('+A+','+(.22*(1-d/D))+')';x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}}
+d=Math.hypot(p.x-m.x,p.y-m.y);if(d<D*1.6){x.strokeStyle='rgba('+Bc+','+(.5*(1-d/(D*1.6)))+')';x.beginPath();x.moveTo(p.x,p.y);x.lineTo(m.x,m.y);x.stroke()}}}
+function setView(v){theme();vids.forEach(function(el){if(!el.isConnected)return;var on=!rm&&el.dataset.for.split(' ').indexOf(v)>-1;el.classList.toggle('on',on);
+if(on){if(!el.getAttribute('src'))el.src=el.dataset.src;var p=el.play();p&&p.catch(function(){})}else el.pause()})}
+vids.forEach(function(el){el.addEventListener('error',function(){el.remove()})});
+window.addEventListener('viewchange',function(e){setView(e.detail);setup()});
+// orbs, reveal targets, tilt
+var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08}):null;
+document.querySelectorAll('.home-hero,.sub .hero').forEach(function(h,i){[['orb',220,'8%','72%',-.18],['orb',120,'62%','88%',.12]].forEach(function(o,k){var s=document.createElement('span');s.className='orb';s.dataset.speed=o[4];s.style.cssText='width:'+o[1]+'px;height:'+o[1]+'px;top:'+o[2]+';left:'+o[3];h.appendChild(s)})});
+var items=[].slice.call(document.querySelectorAll('[data-speed]'));
+function setup(){document.querySelectorAll('.view:not([hidden]) :is(.home-head,.about-copy,.work-card,.contact-card,form,.sub .section-head,.card,.work-item,.study-head,.piece,.page-card,.game-card,.download-line)').forEach(function(el){if(el.hasAttribute('data-r'))return;el.setAttribute('data-r','');if(io)io.observe(el);else el.classList.add('in')})}
+if(fine)document.querySelectorAll('.work-card,.sub .card,a.work-item').forEach(function(el){el.setAttribute('data-tilt','');
+el.addEventListener('pointermove',function(e){var b=el.getBoundingClientRect(),px=(e.clientX-b.left)/b.width,py=(e.clientY-b.top)/b.height;el.style.setProperty('--ry',((px-.5)*7).toFixed(2)+'deg');el.style.setProperty('--rx',((.5-py)*7).toFixed(2)+'deg');el.style.setProperty('--gx',px*100+'%');el.style.setProperty('--gy',py*100+'%')});
+el.addEventListener('pointerleave',function(){el.style.setProperty('--rx','0deg');el.style.setProperty('--ry','0deg')})});
+var tx=0,ty=0,cx=0,cy=0,root=document.documentElement,xp=document.querySelector('.xp');
+addEventListener('pointermove',function(e){m.x=e.clientX*dpr;m.y=e.clientY*dpr;tx=e.clientX/innerWidth-.5;ty=e.clientY/innerHeight-.5;root.style.setProperty('--mx',e.clientX+'px');root.style.setProperty('--my',e.clientY+'px')},{passive:true});
+function tick(){if(!document.hidden){var sy=scrollY;cx+=(tx-cx)*.06;cy+=(ty-cy)*.06;
+items.forEach(function(el){var s=+el.dataset.speed;el.style.transform='translate3d('+(cx*60*s*2).toFixed(1)+'px,'+(-sy*s+cy*60*s*2).toFixed(1)+'px,0)'});
+vids.forEach(function(v){v.style.transform='translate3d(0,'+(-sy*.04).toFixed(1)+'px,0) scale(1.05)'});
+xp.style.transform='scaleX('+Math.min(1,sy/Math.max(1,root.scrollHeight-innerHeight))+')';draw()}requestAnimationFrame(tick)}
+addEventListener('resize',size);size();setView(B.dataset.view);setup();if(rm)draw();else tick();
+})();
+</script>
+</body>
+</html>
